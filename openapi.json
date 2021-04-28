@@ -8,7 +8,7 @@
   ],
   "info": {
     "title": "Open Government Portal",
-    "description": "This API provides live access to the Open Government Portal. Further documentation on the API is available from http://docs.ckan.org/en/latest/ Confirm the version of the API available from the catalogue by requesting https://catalogue.data.gov.bc.ca/api/3/action/status_show. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+    "description": "This API provides live access to the Open Government Portal. Further documentation on the API is available from http://docs.ckan.org/en/latest/ \n\n    Confirm the version of the API available from the catalogue by requesting https://open.canada.ca/data/api/3/action/status_show. \n\n",
     "termsOfService": "https://open.canada.ca/en/open-government-licence-canada",
     "contact": {
       "name": "TBS Open Government",
