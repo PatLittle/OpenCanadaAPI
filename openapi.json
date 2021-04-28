@@ -1,0 +1,771 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://open.canada.ca/data/api/3",
+      "description": "Production"
+    }
+  ],
+  "info": {
+    "title": "Open Government Portal",
+    "description": "This API provides live access to the Open Government Portal. Further documentation on the API is available from http://docs.ckan.org/en/latest/ Confirm the version of the API available from the catalogue by requesting https://catalogue.data.gov.bc.ca/api/3/action/status_show. \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers.",
+    "termsOfService": "https://open.canada.ca/en/open-government-licence-canada",
+    "contact": {
+      "name": "TBS Open Government",
+      "url": "http://open.canada.ca/",
+      "email": "open-ouvert@tbs-sct.gc.ca"
+    },
+    "license": {
+      "name": "Open Government License - Canada",
+      "url": "https://open.canada.ca/en/open-government-licence-canada"
+    },
+    "version": "3.0.1"
+  },
+  "tags": [
+    {
+      "name": "action",
+      "description": "CKAN's Action API is a powerful, RPC-style API that exposes all of CKAN's core features to API clients.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://docs.ckan.org/en/2.8/api/index.html"
+      }
+    }
+  ],
+  "security": [
+    {
+      "internalApiKey": []
+    }
+  ],
+  "paths": {
+    "/action/tag_list": {
+      "get": {
+        "summary": "Get a list of tags",
+        "description": "Returns the names of all indexed tags",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The offset (index) of the first tag to return",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of tags to be returned per page",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tags"
+          }
+        }
+      }
+    },
+    "/action/status_show": {
+      "get": {
+        "summary": "Get the site status",
+        "description": "Returns the site status",
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the site status, version, installed extensions"
+          }
+        }
+      }
+    },
+    "/action/package_list": {
+      "get": {
+        "summary": "Get a list of all packages (datasets)",
+        "description": "Returns the names of all indexed packages (datasets)",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The offset (index) of the first package to return",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of packages to be returned per page",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of packages"
+          }
+        }
+      }
+    },
+    "/action/package_search": {
+      "get": {
+        "summary": "Find packages (datasets) matching query terms",
+        "description": "Searches for packages (datasets) matching the specified query terms",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A query string",
+            "schema": {
+              "type": "string",
+              "default": "\"Fuel Consumption Ratings\""
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of packages"
+          }
+        }
+      }
+    },
+    "/action/package_show": {
+      "get": {
+        "summary": "Get metadata about one specific package (dataset)",
+        "description": "Returns metadata about the package (dataset) corresponding to the specified unique name",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The package name",
+            "schema": {
+              "type": "string",
+              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "A package metadata object"
+          }
+        }
+      }
+    },
+    "/action/package_activity_list": {
+      "get": {
+        "summary": "Get the activity stream of a package (dataset)",
+        "description": "Returns a package's activity stream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the package",
+            "schema": {
+              "type": "string",
+              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Where to start getting activity items from",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of activities to return",
+            "schema": {
+              "type": "integer",
+              "default": 31
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of activities"
+          }
+        }
+      }
+    },
+    "/action/package_activity_list_html": {
+      "get": {
+        "summary": "Get the activity stream of a package (dataset), HTML format",
+        "description": "The activity stream is rendered as a snippet of HTML meant to be included in an HTML pag, i.e it doesn't have any header or footer.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the package",
+            "schema": {
+              "type": "string",
+              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Where to start getting activity items from",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of activities to return",
+            "schema": {
+              "type": "integer",
+              "default": 31
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of activities rendered as HTML snippet"
+          }
+        }
+      }
+    },
+    "/action/package_autocomplete": {
+      "get": {
+        "summary": "Find packages (datasets) matching a query",
+        "description": "Return a list of datasets that match a string",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The string to query",
+            "schema": {
+              "type": "string",
+              "default": "\"fuel consumption ratings\""
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of resource formats to return",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of datasets that match a string"
+          }
+        }
+      }
+    },
+    "/action/package_relationships_list": {
+      "get": {
+        "summary": "Get package (dataset) relationships",
+        "description": "Return a dataset's relationships",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the first package",
+            "schema": {
+              "type": "string",
+              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "query",
+            "description": "The id or name of the second package",
+            "schema": {
+              "type": "string",
+              "default": "c4c5c7f1-bfa6-4ff6-b4a0-c164cb2060f7"
+            }
+          },
+          {
+            "name": "rel",
+            "in": "query",
+            "description": "relationship as string",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of dataset relationships"
+          }
+        }
+      }
+    },
+    "/action/package_revision_list": {
+      "get": {
+        "summary": "Get list of revisions for a package (dataset)",
+        "description": "Return a dataset's revision as a list of dictionaries",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the dataset",
+            "schema": {
+              "type": "string",
+              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of dataset revisions"
+          }
+        }
+      }
+    },
+    "/action/organization_activity_list": {
+      "get": {
+        "summary": "Get the activity stream of an organization",
+        "description": "Return an organization's activity stream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the organization",
+            "schema": {
+              "type": "string",
+              "default": "ec"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of an organization's activities"
+          }
+        }
+      }
+    },
+    "/action/organization_activity_list_html": {
+      "get": {
+        "summary": "Get the activity stream of an organization, HTML format",
+        "description": "Return an organization's activity stream as HTML",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the organization",
+            "schema": {
+              "type": "string",
+              "default": "ec"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of an organization's activities in HTML"
+          }
+        }
+      }
+    },
+    "/action/organization_follower_count": {
+      "get": {
+        "summary": "Get number of followers of an organization",
+        "description": "Return the number of followers of an organization",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the organization",
+            "schema": {
+              "type": "string",
+              "default": "ec"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "Count of organization followers"
+          }
+        }
+      }
+    },
+    "/action/organization_follower_list": {
+      "get": {
+        "summary": "Get users following an organization",
+        "description": "Return a list of users that are following a given organization",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the organization",
+            "schema": {
+              "type": "string",
+              "default": "ec"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of organization followers"
+          }
+        }
+      }
+    },
+    "/action/organization_list_for_user": {
+      "get": {
+        "summary": "Get organizations that a user has a given permission for",
+        "description": "Return the organizations that the user has a given permission for",
+        "parameters": [
+          {
+            "name": "permission",
+            "in": "query",
+            "description": "The permission the user has against the returned organization",
+            "schema": {
+              "type": "string",
+              "default": "\"edit_group\""
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of organizations for given permission"
+          }
+        }
+      }
+    },
+    "/action/organization_revision_list": {
+      "get": {
+        "summary": "Get organization revisions",
+        "description": "Return an organization's revisions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The name or id of the organization",
+            "schema": {
+              "type": "string",
+              "default": "ministry-of-agriculture"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of an organization's revisions"
+          }
+        }
+      }
+    },
+    "/action/organization_show": {
+      "get": {
+        "summary": "Get details of a specific organization",
+        "description": "Return the details of an organization",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id or name of the organization",
+            "schema": {
+              "type": "string",
+              "default": "tbs-sct"
+            }
+          },
+          {
+            "name": "include_datasets",
+            "in": "query",
+            "description": "include a list of the organization's datasets",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List organization details"
+          }
+        }
+      }
+    },
+    "/action/organization_list": {
+      "get": {
+        "summary": "Get names of all organizations",
+        "description": "Returns the names of all indexed organizations",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The offset (index) of the first organizations to return",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of organizations to be returned per page",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of organizations"
+          }
+        }
+      }
+    },
+    "/action/organization_autocomplete": {
+      "get": {
+        "summary": "Get names of organizations that match a query string",
+        "description": "Return a list of organization names that contain a string",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The string to search for",
+            "schema": {
+              "type": "string",
+              "default": "canada"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of organizations to return (optional)",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of organizations"
+          }
+        }
+      }
+    },
+    "/action/resource_search": {
+      "get": {
+        "summary": "Find resources",
+        "description": "Returns a dictionary with two fields ``count`` and ``results``.             The ``count`` field contains the total number of Resources                found without the limit or query parameters having an effect.             The ``results`` field is a list of dictized Resource objects.             The query parameter is a required field. It is a string in                the form ``{field}:{term}`` or a list of strings, each of the             same form. Within each string, ``{field}`` is a field or extra             field on the Resource domain object.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search criteria string or list of strings of the form ``{field}:{term1}``",
+            "schema": {
+              "type": "string",
+              "default": "format:csv"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Depreciated",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "description": "A field on the resource model that orders the results",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Apply an offset to the query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Apply a limit to the query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "Search for resources"
+          }
+        }
+      }
+    },
+    "/action/resource_show": {
+      "get": {
+        "summary": "Get metadata for a specific resource",
+        "description": "Return the metadata of a resource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id of the resource",
+            "schema": {
+              "type": "string",
+              "default": "e6c8bb1d-3726-418b-9b7e-1d97a9bbb817"
+            }
+          },
+          {
+            "name": "include_tracking",
+            "in": "query",
+            "description": "Add tracking information to dataset",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return metadata of a resource"
+          }
+        }
+      }
+    },
+    "/action/related_list": {
+      "get": {
+        "summary": "Gets items related to a package (dataset)",
+        "description": "Returns a dataset's related items.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id or name of the dataset (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataset",
+            "in": "query",
+            "description": "Dataset dictionary of the dataset (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type_filter",
+            "in": "query",
+            "description": "The type of related item to show (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The order to sort the related items in",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "whether or not to restrict the results to only featured items",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "action"
+        ],
+        "responses": {
+          "200": {
+            "description": "Search for related items"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "internalApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ckan_api_key"
+      }
+    }
+  }
+}
