@@ -37,40 +37,6 @@
     }
   ],
   "paths": {
-    "/action/tag_list": {
-      "get": {
-        "summary": "Get a list of tags",
-        "description": "Returns the names of all indexed tags",
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "The offset (index) of the first tag to return",
-            "schema": {
-              "type": "integer",
-              "default": 0
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The number of tags to be returned per page",
-            "schema": {
-              "type": "integer",
-              "default": 100
-            }
-          }
-        ],
-        "tags": [
-          "action"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of tags"
-          }
-        }
-      }
-    },
     "/action/status_show": {
       "get": {
         "summary": "Get the site status",
@@ -211,50 +177,7 @@
           }
         }
       }
-    },
-    "/action/package_activity_list_html": {
-      "get": {
-        "summary": "Get the activity stream of a package (dataset), HTML format",
-        "description": "The activity stream is rendered as a snippet of HTML meant to be included in an HTML pag, i.e it doesn't have any header or footer.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "The id or name of the package",
-            "schema": {
-              "type": "string",
-              "default": "2916fad5-ebcc-4c86-b0f3-4f619b29f412"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Where to start getting activity items from",
-            "schema": {
-              "type": "integer",
-              "default": 0
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of activities to return",
-            "schema": {
-              "type": "integer",
-              "default": 31
-            }
-          }
-        ],
-        "tags": [
-          "action"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of activities rendered as HTML snippet"
-          }
-        }
-      }
-    },
+    },  
     "/action/package_autocomplete": {
       "get": {
         "summary": "Find packages (datasets) matching a query",
@@ -381,32 +304,7 @@
         }
       }
     },
-    "/action/organization_activity_list_html": {
-      "get": {
-        "summary": "Get the activity stream of an organization, HTML format",
-        "description": "Return an organization's activity stream as HTML",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "The id or name of the organization",
-            "schema": {
-              "type": "string",
-              "default": "ec"
-            }
-          }
-        ],
-        "tags": [
-          "action"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of an organization's activities in HTML"
-          }
-        }
-      }
-    },
-    "/action/organization_follower_count": {
+      "/action/organization_follower_count": {
       "get": {
         "summary": "Get number of followers of an organization",
         "description": "Return the number of followers of an organization",
@@ -697,62 +595,6 @@
         "responses": {
           "200": {
             "description": "Return metadata of a resource"
-          }
-        }
-      }
-    },
-    "/action/related_list": {
-      "get": {
-        "summary": "Gets items related to a package (dataset)",
-        "description": "Returns a dataset's related items.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "id or name of the dataset (optional)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "dataset",
-            "in": "query",
-            "description": "Dataset dictionary of the dataset (optional)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "type_filter",
-            "in": "query",
-            "description": "The type of related item to show (optional)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "The order to sort the related items in",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "featured",
-            "in": "query",
-            "description": "whether or not to restrict the results to only featured items",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "tags": [
-          "action"
-        ],
-        "responses": {
-          "200": {
-            "description": "Search for related items"
           }
         }
       }
