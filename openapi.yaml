@@ -120,71 +120,6 @@ paths:
       responses:
         '200':
           description: List of activities
-  "/action/package_autocomplete":
-    get:
-      summary: Find packages (datasets) matching a query
-      description: Return a list of datasets that match a string
-      parameters:
-      - name: q
-        in: query
-        description: The string to query
-        schema:
-          type: string
-          default: '"fuel consumption ratings"'
-      - name: limit
-        in: query
-        description: The maximum number of resource formats to return
-        schema:
-          type: integer
-          default: 10
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of datasets that match a string
-  "/action/package_relationships_list":
-    get:
-      summary: Get package (dataset) relationships
-      description: Return a dataset's relationships
-      parameters:
-      - name: id
-        in: query
-        description: The id or name of the first package
-        schema:
-          type: string
-          default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
-      - name: id2
-        in: query
-        description: The id or name of the second package
-        schema:
-          type: string
-          default: c4c5c7f1-bfa6-4ff6-b4a0-c164cb2060f7
-      - name: rel
-        in: query
-        description: relationship as string
-        schema:
-          type: string
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of dataset relationships
-  "/action/package_revision_list":
-    get:
-      summary: Get list of revisions for a package (dataset)
-      description: Return a dataset's revision as a list of dictionaries
-      parameters:
-      - name: id
-        in: query
-        description: The id or name of the dataset
-        schema:
-          type: string
-          default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of dataset revisions
   "/action/organization_activity_list":
     get:
       summary: Get the activity stream of an organization
@@ -201,38 +136,6 @@ paths:
       responses:
         '200':
           description: List of an organization's activities
-  "/action/organization_follower_count":
-    get:
-      summary: Get number of followers of an organization
-      description: Return the number of followers of an organization
-      parameters:
-      - name: id
-        in: query
-        description: The id or name of the organization
-        schema:
-          type: string
-          default: ec
-      tags:
-      - action
-      responses:
-        '200':
-          description: Count of organization followers
-  "/action/organization_follower_list":
-    get:
-      summary: Get users following an organization
-      description: Return a list of users that are following a given organization
-      parameters:
-      - name: id
-        in: query
-        description: The id or name of the organization
-        schema:
-          type: string
-          default: ec
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of organization followers
   "/action/organization_list_for_user":
     get:
       summary: Get organizations that a user has a given permission for
@@ -249,22 +152,6 @@ paths:
       responses:
         '200':
           description: List of organizations for given permission
-  "/action/organization_revision_list":
-    get:
-      summary: Get organization revisions
-      description: Return an organization's revisions
-      parameters:
-      - name: id
-        in: query
-        description: The name or id of the organization
-        schema:
-          type: string
-          default: ministry-of-agriculture
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of an organization's revisions
   "/action/organization_show":
     get:
       summary: Get details of a specific organization
@@ -304,28 +191,6 @@ paths:
         schema:
           type: integer
           default: 100
-      tags:
-      - action
-      responses:
-        '200':
-          description: List of organizations
-  "/action/organization_autocomplete":
-    get:
-      summary: Get names of organizations that match a query string
-      description: Return a list of organization names that contain a string
-      parameters:
-      - name: q
-        in: query
-        description: The string to search for
-        schema:
-          type: string
-          default: canada
-      - name: limit
-        in: query
-        description: The maximum number of organizations to return (optional)
-        schema:
-          type: integer
-          default: 20
       tags:
       - action
       responses:
