@@ -15,7 +15,7 @@ servers:
   description: Test Registry for features under development
 
 info:
-  title: Open Government Portal
+  title: Open Government CKAN API
   description: "This API provides live access to the Open Government Portal. Further
     documentation on the API is available from http://docs.ckan.org/en/latest/ \n\n
     \   Confirm the version of the API available from the catalogue by requesting
@@ -41,7 +41,9 @@ tags:
     description: Find out more
     url: https://docs.ckan.org/en/2.8/api/index.html
 security:
-- internalApiKey: []
+- type: apiKey
+  name: Authorization
+  in: header
 paths:
   "/action/status_show":
     get:
