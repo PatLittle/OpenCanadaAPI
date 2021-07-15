@@ -18,6 +18,10 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
     - name: split the yaml
       run: |
         mkdir _build
