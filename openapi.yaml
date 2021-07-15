@@ -1,8 +1,19 @@
 ---
 openapi: 3.0.0
 servers:
-- url: https://open.canada.ca/data/api/3
-  description: Production
+- url: https://open.canada.ca/data/api
+  description: Portal with federated data published to the general public
+- url: https://registry.open.canada.ca/api
+  description: Registry for collecting and publishing data to the portal
+- url: https://staging.open.canada.ca/data/api
+  description: Staging Portal for sharing upcoming features
+- url: https://registry-staging.open.canada.ca/api
+  description: Staging Registry for sharing upcoming features and accounts for testing integration
+- url: https://test.open.canada.ca/data/api
+  description: Test Portal for features under development
+- url: https://registry-test.open.canada.ca/api
+  description: Test Registry for features under development
+
 info:
   title: Open Government Portal
   description: "This API provides live access to the Open Government Portal. Further
@@ -11,8 +22,12 @@ info:
     https://open.canada.ca/data/api/3/action/status_show. \n\n"
   termsOfService: https://open.canada.ca/en/open-government-licence-canada
   contact:
-    name: TBS Open Government
-    url: http://open.canada.ca/
+    name:
+      en: TBS Open Government
+      fr: Gouvernement ouvert SCT
+    url:
+      en: https://open.canada.ca/
+      fr: https://ouvert.canada.ca/
     email: open-ouvert@tbs-sct.gc.ca
   license:
     name: Open Government License - Canada
