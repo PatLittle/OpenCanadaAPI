@@ -40,9 +40,8 @@ tags:
     description: Find out more
     url: https://docs.ckan.org/en/2.8/api/index.html
 security:
-- type: apiKey
-  name: Authorization
-  in: header
+- {}
+- internal_api_key: []
 paths:
   "/action/status_show":
     get:
@@ -281,8 +280,8 @@ paths:
 components:
   schemas: {}
   securitySchemes:
-    internalApiKey:
+    internal_api_key:
       type: apiKey
       in: header
-      name: ckan_api_key
+      name: Authorization
 
