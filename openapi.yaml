@@ -16,10 +16,9 @@ servers:
 
 info:
   title: Open Government CKAN API
-  description: "This API provides live access to the Open Government Portal. Further
-    documentation on the API is available from http://docs.ckan.org/en/latest/ \n\n
-    \   Confirm the version of the API available from the catalogue by requesting
-    https://open.canada.ca/data/api/3/action/status_show. \n\n"
+  description: >
+    This API provides live access to the CKAN portion of the Open Government Portal. Further
+    documentation on the API is available from http://docs.ckan.org/en/2.8/
   termsOfService: https://open.canada.ca/en/open-government-licence-canada
   contact:
     name:
@@ -53,7 +52,7 @@ paths:
       - action
       responses:
         '200':
-          description: Returns the site status, version, installed extensions
+          description: Returns the CKAN version and a list of installed extensions
   "/action/package_list":
     get:
       summary: Get a list of all packages (datasets)
