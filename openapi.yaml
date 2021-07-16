@@ -2,23 +2,25 @@
 openapi: 3.0.0
 servers:
 - url: https://open.canada.ca/data/api
-  description: Portal with federated data published to the general public
+  description: |
+    Production Portal [PUBLIC]
+
+    - includes federated data
 - url: https://registry.open.canada.ca/api
-  description: Registry for collecting and publishing data to the portal
+  description: Registry for collecting and publishing data to the portal [RESTRICTED]
 - url: https://staging.open.canada.ca/data/api
-  description: Staging Portal for sharing upcoming features
+  description: Staging Portal for sharing upcoming features [RESTRICTED]
 - url: https://registry-staging.open.canada.ca/api
-  description: Staging Registry for sharing upcoming features and accounts for testing integration
+  description: Staging Registry for sharing upcoming features and accounts for testing integration [RESTRICTED]
 - url: https://test.open.canada.ca/data/api
-  description: Test Portal for features under development
+  description: Test Portal for features under development [RESTRICTED]
 - url: https://registry-test.open.canada.ca/api
-  description: Test Registry for features under development
+  description: Test Registry for features under development [RESTRICTED]
 
 info:
   title: Open Government CKAN API
   description: >
-    This API provides live access to the CKAN portion of the Open Government Portal. Further
-    documentation on the API is available from http://docs.ckan.org/en/2.8/
+    This API provides live access to the CKAN portion of the Open Government Portal and Registry systems.
   termsOfService: https://open.canada.ca/en/open-government-licence-canada
   contact:
     name:
@@ -31,7 +33,7 @@ info:
   license:
     name: Open Government License - Canada
     url: https://open.canada.ca/en/open-government-licence-canada
-  version: 3.0.1
+  version: '0.1'
 tags:
 - name: action
   description: CKAN's Action API is a powerful, RPC-style API that exposes all of
