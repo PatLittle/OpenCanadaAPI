@@ -25,8 +25,13 @@ jobs:
     - name: split the yaml
       run: |
         mkdir _build
-        python3 splityaml.py openapi.yaml en _build/openapi-en.json
-        python3 splityaml.py openapi.yaml fr _build/openapi-fr.json
+        python splityaml.py openapi.yaml en _build/openapi-en.json
+        python splityaml.py openapi.yaml fr _build/openapi-fr.json
+
+    - name: Test that our specs are valid
+      run: |
+        openapi-spec-validator _build/openapi-en.json
+        openapi-spec-validator _build/openapi-fr.json
         cp index.html index-en.html index-fr.html _build
 
     - name: GitHub Pages action
