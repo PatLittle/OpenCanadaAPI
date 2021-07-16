@@ -2,14 +2,11 @@
 openapi: 3.0.0
 servers:
 - url: https://open.canada.ca/data/api
-  description: |
-    Production Portal [PUBLIC]
-
-    - includes federated data
+  description: Production Portal [PUBLIC]
 - url: https://registry.open.canada.ca/api
-  description: Registry for collecting and publishing data to the portal [RESTRICTED]
+  description: Production Registry [RESTRICTED]
 - url: https://staging.open.canada.ca/data/api
-  description: Staging Portal for sharing upcoming features [RESTRICTED]
+  description: Staging Portal [RESTRICTED]
 - url: https://registry-staging.open.canada.ca/api
   description: Staging Registry for sharing upcoming features and accounts for testing integration [RESTRICTED]
 - url: https://test.open.canada.ca/data/api
@@ -19,8 +16,33 @@ servers:
 
 info:
   title: Open Government CKAN API
-  description: >
+  description: |
     This API provides live access to the CKAN portion of the Open Government Portal and Registry systems.
+
+    - Production Portal: https://open.canada.ca
+      - our public data portal
+      - includes data federated from provinces and municipalities
+      - read-only API calls can be made without an API key
+      - authorization required only for publishing federated data
+    - Production Registry: https://registry.open.canada.ca
+      - accessible within the GoC network
+      - for collecting and publishing data from GoC departments
+      - new datasets must be manually reviewed and approved by the Open Government team
+      - publishes approved datasets to the Production Portal automatically
+      - user account or API key required for all operations
+    - Staging Portal: https://staging.open.canada.ca
+      - accessible within the GoC network
+      - for sharing upcoming features and testing integration
+    - Staging Registry: https://registry-staging.open.canada.ca
+      - accessible within the GoC network
+      - for sharing upcoming features and testing integration
+    - Test Portal: https://test.open.canada.ca
+      - accessible within the GoC network
+      - for features in development
+    - Test Registry: https://registry-test.open.canada.ca
+      - accessible within the GoC network
+      - for features in development
+
   termsOfService: https://open.canada.ca/en/open-government-licence-canada
   contact:
     name:
@@ -48,7 +70,7 @@ paths:
   "/action/status_show":
     get:
       summary: Get the site status
-      description: Returns the site status
+      description: Use this API to check that you can reach the server or to query information about the server.
       tags:
       - action
       responses:
