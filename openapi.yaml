@@ -73,19 +73,6 @@ paths:
       summary: Get a list of all package ids (datasets)
       description: >
         Note: our site uses the same value for the "name" and "id" fields of datasets
-      parameters:
-      - name: offset
-        in: query
-        description: The offset (index) of the first package id to return
-        schema:
-          type: integer
-          default: 0
-      - name: limit
-        in: query
-        description: The maximum number of package ids to be returned per page
-        schema:
-          type: integer
-          default: 100
       tags:
       - action
       responses:
