@@ -61,8 +61,8 @@ security:
 paths:
   "/action/status_show":
     get:
-      summary: Get the site status
-      description: Use this API to check that you can reach the server or to query information about the server.
+      summary: Get the CKAN version and a list of installed extensions
+      description: Use this API to check that you can reach the server and to check its capabilities.
       tags:
       - action
       responses:
@@ -70,18 +70,19 @@ paths:
           description: Returns the CKAN version and a list of installed extensions
   "/action/package_list":
     get:
-      summary: Get a list of all packages (datasets)
-      description: Returns the names of all indexed packages (datasets)
+      summary: Get a list of all package ids (datasets)
+      description: >
+        Note: our site uses the same value for the "name" and "id" fields of datasets
       parameters:
       - name: offset
         in: query
-        description: The offset (index) of the first package to return
+        description: The offset (index) of the first package id to return
         schema:
           type: integer
           default: 0
       - name: limit
         in: query
-        description: The number of packages to be returned per page
+        description: The maximum number of package ids to be returned per page
         schema:
           type: integer
           default: 100
@@ -89,7 +90,7 @@ paths:
       - action
       responses:
         '200':
-          description: List of packages
+          description: Returns a list of package ids
   "/action/package_search":
     get:
       summary: Find packages (datasets) matching query terms
