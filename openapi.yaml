@@ -89,24 +89,52 @@ paths:
           A solr query string that will be used to filter and score results
         schema:
           type: string
-          default: 'analytics'
+        examples:
+          Analytics:
+            value: 'analytics'
+          Mammals:
+            value: 'mammal population'
       - name: fq
         in: query
         description: |
           A solr filter query that will facet results by removing non-matching items.
-          The available parameters can be discovered by interacting with the
+          The available parameters may be discovered by interacting with the
           facets on https://open.canada.ca/data/dataset and observing the
           query parameters generated.
         schema:
           type: string
-          default: 'organization:tbs-sct'
         examples:
-          muni-example:
+          TBS:
+            value: 'organization:tbs-sct'
+          Municipal:
             value: 'jurisdiction:municipal'
-          multi-example:
-            value: 'collection:primary organization:ec'
-          subject-example:
+          Transport:
             value: 'subject:transport'
+          Open Maps + EC:
+            value: 'collection:fgp organization:ec'
+      - name: sort
+        in: query
+        description: Sort order for the search results
+        schema:
+          type: string
+          default: score desc, metadata_modified desc
+      - name: rows
+        in: query
+        description: Maximum rows to return, clamped to 1000
+        schema:
+          type: integer
+      - name: start
+        in: query
+        description: The offset from the beginning of results (0) for pagination
+        schema:
+          type: integer
+      - name: include_private
+        in: query
+        description: |
+          Must be set to true to retrieve results on the Registry,
+          no effect on the Portal
+        schema:
+          type: boolean
       tags:
       - action
       responses:
