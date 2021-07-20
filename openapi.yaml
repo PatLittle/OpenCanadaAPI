@@ -85,15 +85,33 @@ paths:
       parameters:
       - name: q
         in: query
-        description: A query string
+        description: |
+          A solr query string that will be used to filter and score results
         schema:
           type: string
-          default: '"Fuel Consumption Ratings"'
+          default: 'analytics'
+      - name: fq
+        in: query
+        description: |
+          A solr filter query that will facet results by removing non-matching items.
+          The available parameters can be discovered by interacting with the
+          facets on https://open.canada.ca/data/dataset and observing the
+          query parameters generated.
+        schema:
+          type: string
+          default: 'organization:tbs-sct'
+        examples:
+          muni-example:
+            value: 'jurisdiction:municipal'
+          multi-example:
+            value: 'collection:primary organization:ec'
+          subject-example:
+            value: 'subject:transport'
       tags:
       - action
       responses:
         '200':
-          description: List of packages
+          description: List of packages (datasets) including all metadata available.
   "/action/package_show":
     get:
       summary: Get metadata about one specific package (dataset)
