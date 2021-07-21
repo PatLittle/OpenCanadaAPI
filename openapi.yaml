@@ -79,62 +79,62 @@ paths:
         '200':
           description: Returns a list of package ids
   "/action/package_search":
-    get:
+    post:
       summary: Find packages (datasets) matching query terms
       description: Searches for packages (datasets) matching the specified query terms
-      parameters:
-      - name: q
-        in: query
-        description: |
-          A solr query string that will be used to filter and score results
-        schema:
-          type: string
-        examples:
-          Analytics:
-            value: 'analytics'
-          Mammals:
-            value: 'mammal population'
-      - name: fq
-        in: query
-        description: |
-          A solr filter query that will facet results by removing non-matching items.
-          The available parameters may be discovered by interacting with the
-          facets on https://open.canada.ca/data/dataset and observing the
-          query parameters generated.
-        schema:
-          type: string
-        examples:
-          TBS:
-            value: 'organization:tbs-sct'
-          Municipal:
-            value: 'jurisdiction:municipal'
-          Transport:
-            value: 'subject:transport'
-          Open Maps + EC:
-            value: 'collection:fgp organization:ec'
-      - name: sort
-        in: query
-        description: Sort order for the search results
-        schema:
-          type: string
-          default: score desc, metadata_modified desc
-      - name: rows
-        in: query
-        description: Maximum rows to return, clamped to 1000
-        schema:
-          type: integer
-      - name: start
-        in: query
-        description: The offset from the beginning of results (0) for pagination
-        schema:
-          type: integer
-      - name: include_private
-        in: query
-        description: |
-          Must be set to true to retrieve results on the Registry,
-          no effect on the Portal
-        schema:
-          type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                q:
+                  type: string
+                  description: |
+                    A solr query string that will be used to filter and score results
+                fq:
+                  type: string
+                  description: |
+                    A solr filter query that will facet results by removing non-matching items.
+                    The available parameters may be discovered by interacting with the
+                    facets on https://open.canada.ca/data/dataset and observing the
+                    query parameters generated.
+                sort:
+                  type: string
+                  description: |
+                    Sort order for the search results, defaults to `score desc, metadata_modified desc`
+                    meaning sort by query score order, and with no query sort by most recently modified
+                rows:
+                  type: integer
+                  description: Maximum rows to return, clamped to 1000
+                start:
+                  type: integer
+                  description: The offset from the beginning of results (0) for pagination
+                include_private:
+                  type: boolean
+                  description: |
+                    Must be set to `true` to retrieve results on the Registry,
+                    no effect on the Portal
+            examples:
+              Analytics:
+                value:
+                  q: analytics
+              Mammals:
+                value:
+                  q: mammal population
+              TBS:
+                value:
+                  fq: 'organization:tbs-sct'
+              Municipal:
+                value:
+                  fq: 'jurisdiction:municipal'
+              Transport:
+                value:
+                  fq: 'subject:transport'
+              Open Maps + EC:
+                value:
+                  fq: 'collection:fgp organization:ec'
       tags:
       - action
       responses:
