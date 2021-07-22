@@ -26,7 +26,7 @@ info:
       - authorization required only for publishing federated data
 
     - Registry: https://registry.open.canada.ca
-      - accessible within the GoC network
+      - accessible within the Government of Canada (GoC) network
       - for collecting and publishing data from GoC departments
       - new datasets must be manually reviewed and approved by the Open Government team
       - publishes approved datasets to the Production Portal automatically
