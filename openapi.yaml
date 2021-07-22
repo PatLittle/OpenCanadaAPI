@@ -100,6 +100,11 @@ paths:
                   type: string
                   description: |
                     A solr query string that will be used to filter and score results
+                  examples:
+                    Analytics:
+                      value: analytics
+                    Mammals:
+                      value: mammal population
                 fq:
                   type: string
                   description: |
@@ -107,6 +112,15 @@ paths:
                     The available parameters may be discovered by interacting with the
                     facets on https://open.canada.ca/data/dataset and observing the
                     query parameters generated.
+                  examples:
+                    Published by the federal Treasury Board Secretariat:
+                      value: 'organization:tbs-sct'
+                    Published by municipalities:
+                      value: 'jurisdiction:municipal'
+                    Transport data:
+                      value: 'subject:transport'
+                    Federal Open Maps data from Environment Canada:
+                      value: 'collection:fgp organization:ec'
                 sort:
                   type: string
                   description: |
@@ -124,24 +138,11 @@ paths:
                     Must be set to `true` to retrieve results on the Registry,
                     no effect on the Portal
             examples:
-              Analytics:
+              Third page of 50 datasets by last modified date:
                 value:
-                  q: analytics
-              Mammals:
-                value:
-                  q: mammal population
-              TBS:
-                value:
-                  fq: 'organization:tbs-sct'
-              Municipal:
-                value:
-                  fq: 'jurisdiction:municipal'
-              Transport:
-                value:
-                  fq: 'subject:transport'
-              Open Maps + EC:
-                value:
-                  fq: 'collection:fgp organization:ec'
+                  sort: metadata_modified desc
+                  start: 100
+                  rows: 50
       tags:
       - action
       responses:

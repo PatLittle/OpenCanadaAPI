@@ -28,20 +28,25 @@ def split(d, lng):
 
 def convert_post_to_get_params(post):
     props = post['requestBody']['content']['application/json']['schema']['properties']
+    params = []
+    for k, v in props.items():
+        p = {
+            'name': k,
+            'in': 'query',
+            'description': v['description'],
+            'schema': {
+                'type': v['type'],
+            },
+        }
+        if 'examples' in v:
+            # need to pop so that post schema validated
+            p['examples'] = v.pop('examples')
+        params.append(p)
+
     return {
         'summary': post['summary'],
         'description': post['description'],
-        'parameters': [
-            {
-                'name': k,
-                'in': 'query',
-                'description': v['description'],
-                'schema': {
-                    'type': v['type'],
-                },
-                'examples': v.get('examples', {}),
-            } for (k, v) in props.items()
-        ],
+        'parameters': params,
         'responses': post['responses'],
         'tags': post['tags'],
     }
