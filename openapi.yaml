@@ -104,6 +104,8 @@ paths:
                   description: |
                     A solr query string that will be used to filter and score results
                   examples:
+                    All data:
+                      value: ''
                     Analytics:
                       value: analytics
                     Mammals:
@@ -116,6 +118,8 @@ paths:
                     facets on https://open.canada.ca/data/dataset and observing the
                     query parameters generated.
                   examples:
+                    All data:
+                      value: ''
                     Published by the federal Treasury Board Secretariat:
                       value: 'organization:tbs-sct'
                     Published by municipalities:
@@ -141,6 +145,8 @@ paths:
                     Must be set to `true` to retrieve results on the Registry,
                     no effect on the Portal
             examples:
+              All data:
+                value: {}
               Third page of 50 datasets by last modified date:
                 value:
                   sort: metadata_modified desc
