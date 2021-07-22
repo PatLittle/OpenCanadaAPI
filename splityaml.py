@@ -43,6 +43,7 @@ def convert_post_to_get_params(post):
             } for (k, v) in props.items()
         ],
         'responses': post['responses'],
+        'tags': post['tags'],
     }
 
 with open(sys.argv[1], encoding='utf-8') as r:
