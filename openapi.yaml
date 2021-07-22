@@ -50,8 +50,15 @@ info:
   version: '0.1'
 tags:
 - name: action
-  description: CKAN's Action API is a powerful, RPC-style API that exposes all of
+  description: |
+    CKAN's Action API is a powerful, RPC-style API that exposes all of
     CKAN's core features to API clients.
+
+    All endpoints support POST requests with an `application/json` or a
+    `multipart/form-data` body. Endpoints that only return
+    data (`*_show`, `*_list`, `*_search` etc.) also accept GET requests with
+    query parameters. Use `application/json` when nested json parameters
+    are required and use `multipart/form-data` when file uploads are required.
   externalDocs:
     description: Find out more
     url: https://docs.ckan.org/en/2.8/api/index.html
