@@ -56,12 +56,12 @@ tags:
 
     - All endpoints support POST requests with an `application/json` or a
       `multipart/form-data` body
+    - Use an `application/json` POST request when nested json parameters
+      are required
+    - Use a `multipart/form-data` POST request when file uploads are required
     - Read-only endpoints (`*_show`, `*_list`, `*_search` etc.)
       also accept GET requests with query parameters
 
-    Use an `application/json` POST request when nested json parameters
-    are required and use `multipart/form-data` POST request when file uploads
-    are required.
   externalDocs:
     description: Full docs
     url: https://docs.ckan.org/en/2.8/api/
