@@ -63,8 +63,8 @@ tags:
     are required and use `multipart/form-data` POST request when file uploads
     are required.
   externalDocs:
-    description: Find out more
-    url: https://docs.ckan.org/en/2.8/api/index.html
+    description: Full docs
+    url: https://docs.ckan.org/en/2.8/api/
 security:
 - {}
 - internal_api_key: []
