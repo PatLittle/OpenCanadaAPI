@@ -56,7 +56,7 @@ tags:
 
     - All endpoints support POST requests with an `application/json` or a
       `multipart/form-data` body
-    - Endpoints that only return data (`*_show`, `*_list`, `*_search` etc.)
+    - Read-only endpoints (`*_show`, `*_list`, `*_search` etc.)
       also accept GET requests with query parameters
 
     Use an `application/json` POST request when nested json parameters
