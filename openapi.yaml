@@ -79,7 +79,7 @@ paths:
         '200':
           description: Returns a list of package ids
   "/action/package_search":
-    post:
+    post/get:
       summary: Find packages (datasets) matching query terms
       description: Searches for packages (datasets) matching the specified query terms
       requestBody:
