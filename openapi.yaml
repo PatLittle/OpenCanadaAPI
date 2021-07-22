@@ -118,7 +118,7 @@ paths:
                     facets on https://open.canada.ca/data/dataset and observing the
                     query parameters generated.
                   examples:
-                    All data:
+                    No filter:
                       value: ''
                     Published by the federal Treasury Board Secretariat:
                       value: 'organization:tbs-sct'
