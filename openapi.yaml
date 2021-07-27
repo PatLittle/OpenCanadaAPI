@@ -157,7 +157,7 @@ paths:
                 rows:
                   type: integer
                   description: Maximum rows to return, clamped to 1000
-                  default: 100
+                  default: 20
                 start:
                   type: integer
                   description: The offset from the beginning of results (0) for pagination
@@ -167,18 +167,18 @@ paths:
                     Must be set to `true` to retrieve results on the Registry,
                     no effect on the Portal
             examples:
-              100 most recently modified datasets:
+              10 most recently modified datasets:
                 value:
-                  rows: 100
-              30 datasets that best match "water use":
+                  rows: 10
+              3 datasets that best match "water use":
                 value:
                   q: water use
-                  rows: 30
-              Datasets number 101-150 by last modified date:
+                  rows: 3
+              Datasets number 101-120 by last modified date:
                 value:
                   sort: metadata_modified desc
                   start: 100
-                  rows: 50
+                  rows: 20
       tags:
       - action
       responses:
