@@ -60,7 +60,28 @@ tags:
       are required
     - Use a `multipart/form-data` POST request when file uploads are required
     - Read-only endpoints (`*_show`, `*_list`, `*_search` etc.)
-      also accept GET requests with query parameters
+      accept GET requests with query parameters
+    - Responses are returned in a JSON envelope on success:
+      ```
+      {
+        "help": "url to complete endpoint help",
+        "success": true,
+        "result": {...}
+      }
+      ```
+      or on errors:
+      ```
+      {
+        "help": "url to complete endpoint help",
+        "success": false,
+        "error": {
+          "__type": "error type",
+          "message": "error message",
+          "field-with-error": ["first-error", "second-error"],
+          ...
+        }
+      }
+      ```
 
   externalDocs:
     description: Full docs
@@ -78,21 +99,6 @@ paths:
       responses:
         '200':
           description: Returns the CKAN version and a list of installed extensions
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  help:
-                    type: string
-                    description: link to full API documentation for this endpoint
-                  success:
-                    type: boolean
-                    description: always true
-                  result:
-                    type: object
-                    description: the values returned from this endpoint
-
   "/action/package_list":
     get:
       summary: Get a list of all package ids (datasets)
