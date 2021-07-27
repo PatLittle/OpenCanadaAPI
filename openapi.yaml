@@ -79,7 +79,20 @@ paths:
         '200':
           description: Returns the CKAN version and a list of installed extensions
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+                properties:
+                  help:
+                    type: string
+                    description: link to full API documentation for this endpoint
+                  success:
+                    type: boolean
+                    description: always true
+                  result:
+                    type: object
+                    description: the values returned from this endpoint
+
   "/action/package_list":
     get:
       summary: Get a list of all package ids (datasets)
