@@ -41,6 +41,8 @@ def convert_post_to_get_params(post):
         if 'examples' in v:
             # need to pop so that post schema validated
             p['examples'] = v.pop('examples')
+        if 'default' in v:
+            p['schema']['default'] = v.pop('default')
         params.append(p)
 
     return {
