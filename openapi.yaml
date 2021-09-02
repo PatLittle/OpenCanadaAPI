@@ -188,12 +188,16 @@ paths:
   "/action/package_show":
     get:
       summary: Get metadata about one specific package (dataset)
-      description: Returns metadata about the package (dataset) corresponding to the
-        specified unique name
+      description: Returns metadata about the package (dataset) corresponding to its UUID.
+        Refer to the [open data schema (type=dataset)]
+        (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        or the [open information schema (type=info)]
+        (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+        for information about the metadata fields returned.
       parameters:
       - name: id
         in: query
-        description: The package name
+        description: The package UUID
         schema:
           type: string
           default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
@@ -205,17 +209,17 @@ paths:
   "/action/package_activity_list":
     get:
       summary: Get the activity stream of a package (dataset)
-      description: Returns a package's activity stream
+      description: Returns a package's activity stream, newest activities first
       parameters:
       - name: id
         in: query
-        description: The id or name of the package
+        description: The package UUID
         schema:
           type: string
           default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
       - name: offset
         in: query
-        description: Where to start getting activity items from
+        description: The offset of the first activity to return, used for pagination
         schema:
           type: integer
           default: 0
@@ -233,14 +237,26 @@ paths:
   "/action/organization_activity_list":
     get:
       summary: Get the activity stream of an organization
-      description: Return an organization's activity stream
+      description: Return an organization's activity stream, newest activites first
       parameters:
       - name: id
         in: query
-        description: The id or name of the organization
+        description: The id or name (short form) of the organization
         schema:
           type: string
           default: ec
+      - name: offset
+        in: query
+        description: The offset of the first activity to return, used for pagination
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: The maximum number of activities to return
+        schema:
+          type: integer
+          default: 31
       tags:
       - action
       responses:
@@ -251,12 +267,24 @@ paths:
       summary: Get organizations that a user has a given permission for
       description: Return the organizations that the user has a given permission for
       parameters:
+      - name: id
+        in: query
+        description: The name or id of the user, defaults to the user making the request
+        schema:
+          type: string
       - name: permission
         in: query
         description: The permission the user has against the returned organization
         schema:
           type: string
-          default: '"edit_group"'
+          default: manage_group
+        examples:
+          Admin:
+            value: admin
+          Editor:
+            value: manage_group
+          Member:
+            value: read
       tags:
       - action
       responses:
@@ -269,16 +297,10 @@ paths:
       parameters:
       - name: id
         in: query
-        description: The id or name of the organization
+        description: The id or name (short form) of the organization
         schema:
           type: string
           default: tbs-sct
-      - name: include_datasets
-        in: query
-        description: include a list of the organization's datasets
-        schema:
-          type: boolean
-          default: true
       tags:
       - action
       responses:
@@ -287,20 +309,8 @@ paths:
   "/action/organization_list":
     get:
       summary: Get names of all organizations
-      description: Returns the names of all indexed organizations
-      parameters:
-      - name: offset
-        in: query
-        description: The offset (index) of the first organizations to return
-        schema:
-          type: integer
-          default: 0
-      - name: limit
-        in: query
-        description: The number of organizations to be returned per page
-        schema:
-          type: integer
-          default: 100
+      description: Returns the names (short forms) of all indexed organizations
+      parameters: []
       tags:
       - action
       responses:
@@ -309,13 +319,8 @@ paths:
   "/action/resource_search":
     get:
       summary: Find resources
-      description: Returns a dictionary with two fields ``count`` and ``results``.             The
-        ``count`` field contains the total number of Resources                found
-        without the limit or query parameters having an effect.             The ``results``
-        field is a list of dictized Resource objects.             The query parameter
-        is a required field. It is a string in                the form ``{field}:{term}``
-        or a list of strings, each of the             same form. Within each string,
-        ``{field}`` is a field or extra             field on the Resource domain object.
+      description: Search resources based on their field values. Note that
+        package_search will typically have better performance than this endpoint.
       parameters:
       - name: query
         in: query
@@ -353,7 +358,10 @@ paths:
   "/action/resource_show":
     get:
       summary: Get metadata for a specific resource
-      description: Return the metadata of a resource
+      description: Returns the metadata of a resource. The schema for resources
+        is available at
+        https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset
+        under `resource_fields`
       parameters:
       - name: id
         in: query
