@@ -318,7 +318,8 @@ paths:
     get:
       summary: Find resources
       description: Search resources based on their field values. Note that
-        package_search will typically have better performance than this endpoint.
+        [package_search](#/action/package_search) has better performance
+        and more search functionality than this endpoint.
       parameters:
       - name: query
         in: query
@@ -326,11 +327,6 @@ paths:
         schema:
           type: string
           default: format:csv
-      - name: fields
-        in: query
-        description: Depreciated
-        schema:
-          type: string
       - name: order_by
         in: query
         description: A field on the resource model that orders the results
