@@ -189,10 +189,8 @@ paths:
     get:
       summary: Get metadata about one specific package (dataset)
       description: Returns metadata about the package (dataset) corresponding to its UUID.
-        Refer to the [open data schema (type=dataset)]
-        (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
-        or the [open information schema (type=info)]
-        (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+        Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
         for information about the metadata fields returned.
       parameters:
       - name: id
@@ -358,10 +356,9 @@ paths:
   "/action/resource_show":
     get:
       summary: Get metadata for a specific resource
-      description: Returns the metadata of a resource. The schema for resources
-        is available at
-        https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset
-        under `resource_fields`
+      description: Returns the metadata of a resource. Refer to the
+        [resource_fields value in the dataset schema](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        for information about the metadata fields.
       parameters:
       - name: id
         in: query
