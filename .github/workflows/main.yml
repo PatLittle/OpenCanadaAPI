@@ -30,6 +30,7 @@ jobs:
 
     - name: Test that our specs are valid
       run: |
+        cp -r schemas _build
         openapi-spec-validator _build/openapi-en.json
         openapi-spec-validator _build/openapi-fr.json
         cp index.html index-en.html index-fr.html _build
