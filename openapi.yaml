@@ -318,7 +318,7 @@ paths:
     get:
       summary: Find resources
       description: Search resources based on their field values. Note that
-        [package_search](#/action/package_search) has better performance
+        [package_search](#/action/get_action_package_search) has better performance
         and more search functionality than this endpoint.
       parameters:
       - name: query
@@ -364,7 +364,7 @@ paths:
           default: e6c8bb1d-3726-418b-9b7e-1d97a9bbb817
       - name: include_tracking
         in: query
-        description: Add tracking information to dataset
+        description: Return tracking (usage) information
         schema:
           type: boolean
           default: false
@@ -373,6 +373,29 @@ paths:
       responses:
         '200':
           description: Return metadata of a resource
+  "/action/package_create":
+    post:
+      summary: Create a new dataset (package)
+      description: |
+        The exact fields available will depend on the `type` parameter.
+
+        Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+        for information about all the metadata fields available.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the dataset metadata created
 components:
   schemas: {}
   securitySchemes:
