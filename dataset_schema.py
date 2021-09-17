@@ -14,7 +14,15 @@ schema = envelope['result']
 
 out = {
     'type': 'object',
-    'properties': {},
+    'properties': {
+        'resources': {
+            'type': 'array',
+            'items': {
+                'type': 'object',
+                'properties': {},
+            },
+        },
+    },
 }
 
 for f in schema['dataset_fields']:
@@ -25,7 +33,6 @@ for f in schema['dataset_fields']:
         'title': f['label'][lang],
         'description': f.get('help_text', {'en':'', 'fr':''})[lang],
     }
-    #'required': f.get('required', False),
     if 'fluent_text' in f.get('validators', ''):
         o['type'] = 'object'
         o['properties'] = {
@@ -36,6 +43,26 @@ for f in schema['dataset_fields']:
         o['enum'] = [c['value'] for c in f['choices']]
 
     out['properties'][f['field_name']] = o
+
+
+for f in schema['resource_fields']:
+    if 'label' not in f or f['label'].keys() != {'en', 'fr'}:
+        continue
+    o = {
+        'type': 'string',
+        'title': f['label'][lang],
+        'description': f.get('help_text', {'en':'', 'fr':''})[lang],
+    }
+    if 'fluent_text' in f.get('validators', ''):
+        o['type'] = 'object'
+        o['properties'] = {
+            'en': {'type': 'string'},
+            'fr': {'type': 'string'},
+        }
+    if 'scheming_choices' in f.get('validators', '') and 'choices' in f:
+        o['enum'] = [c['value'] for c in f['choices']]
+
+    out['properties']['resources']['items']['properties'][f['field_name']] = o
 
 
 json.dump(out, sys.stdout, indent=2)
