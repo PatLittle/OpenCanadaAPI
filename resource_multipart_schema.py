@@ -25,7 +25,7 @@ out = {
         'upload': {
             'type': 'string',
             'format': 'binary',
-            'descriprion':
+            'description':
                 'Upload a file instead of providing a url'
                 if lang == 'en' else
                 '...'

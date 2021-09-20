@@ -4,15 +4,15 @@ servers:
 - url: https://open.canada.ca/data/api
   description: Production Portal [PUBLIC]
 - url: https://registry.open.canada.ca/api
-  description: Production Registry [RESTRICTED]
+  description: Production Registry [RESTRICTED ACCESS]
 - url: https://staging.open.canada.ca/data/api
-  description: Staging Portal [RESTRICTED]
+  description: Staging Portal [RESTRICTED ACCESS]
 - url: https://registry-staging.open.canada.ca/api
-  description: Staging Registry [RESTRICTED]
+  description: Staging Registry [RESTRICTED ACCESS]
 - url: https://test.open.canada.ca/data/api
-  description: Test Portal [RESTRICTED]
+  description: Test Portal [RESTRICTED ACCESS]
 - url: https://registry-test.open.canada.ca/api
-  description: Test Registry [RESTRICTED]
+  description: Test Registry [RESTRICTED ACCESS]
 
 info:
   title: Open Government CKAN API
@@ -405,6 +405,24 @@ paths:
                 $ref: 'schemas/dataset-en.json'
               fr:
                 $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the dataset metadata created
+  "/action/resource_create":
+    post:
+      summary: Create a new resource
+      description: |
+        Add a resource to a dataset (package)
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
       tags:
       - action
       responses:
