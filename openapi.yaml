@@ -417,6 +417,12 @@ paths:
         Add a resource to a dataset (package)
       requestBody:
         content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
           multipart/form-data:
             schema:
               en:
