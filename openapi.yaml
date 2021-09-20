@@ -204,6 +204,13 @@ paths:
       responses:
         '200':
           description: A package metadata object
+          content:
+            application/json:
+              schema:
+                en:
+                  $ref: 'schemas/dataset-en.json'
+                fr:
+                  $ref: 'schemas/dataset-fr.json'
   "/action/package_activity_list":
     get:
       summary: Get the activity stream of a package (dataset)
@@ -348,7 +355,7 @@ paths:
       - action
       responses:
         '200':
-          description: Search for resources
+          description: List of resources
   "/action/resource_show":
     get:
       summary: Get metadata for a specific resource
@@ -373,6 +380,13 @@ paths:
       responses:
         '200':
           description: Return metadata of a resource
+          content:
+            application/json:
+              schema:
+                en:
+                  $ref: 'schemas/dataset-en.json#/properties/resources/items'
+                fr:
+                  $ref: 'schemas/dataset-fr.json#/properties/resources/items'
   "/action/package_create":
     post:
       summary: Create a new dataset (package)
