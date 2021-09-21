@@ -198,6 +198,7 @@ paths:
         description: The package UUID
         schema:
           type: string
+          format: uuid
           default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
       tags:
       - action
@@ -458,6 +459,26 @@ paths:
       responses:
         '200':
           description: a copy of the dataset metadata updated
+  "/action/package_delete":
+    post:
+      summary: Delete a dataset (package)
+      description: |
+        Remove a dataset and all its resources including uploaded files (where applicable).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: The id of the dataset
+      tags:
+      - action
+      responses:
+        '200':
+          description: 'null'
   "/action/resource_create":
     post:
       summary: Create a new resource
@@ -532,6 +553,26 @@ paths:
       responses:
         '200':
           description: a copy of the resource metadata updated
+  "/action/resource_delete":
+    post:
+      summary: Delete a resource
+      description: |
+        Remove a resource from a dataset (package) and its uploaded file (where applicable).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: The id of the resource
+      tags:
+      - action
+      responses:
+        '200':
+          description: 'null'
 components:
   schemas: {}
   securitySchemes:
