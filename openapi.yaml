@@ -410,11 +410,59 @@ paths:
       responses:
         '200':
           description: a copy of the dataset metadata created
+  "/action/package_update":
+    post:
+      summary: Update an existing dataset (package)
+      description: |
+        The exact fields available will depend on the `type` parameter.
+
+        Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+        for information about all the metadata fields available.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the dataset metadata updated
+  "/action/package_patch":
+    post:
+      summary: Update only specific fields of an existing dataset (package)
+      description: |
+        Any fields not passed will retain their original values.
+
+        The exact fields available will depend on the `type` parameter.
+
+        Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+        or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+        for information about all the metadata fields available.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the dataset metadata updated
   "/action/resource_create":
     post:
       summary: Create a new resource
       description: |
-        Add a resource to a dataset (package)
+        Add a resource to a dataset (package). POST using `multipart/form-data` to upload a file.
       requestBody:
         content:
           application/json:
@@ -433,7 +481,57 @@ paths:
       - action
       responses:
         '200':
-          description: a copy of the dataset metadata created
+          description: a copy of the resource metadata created
+  "/action/resource_update":
+    post:
+      summary: Update an existing resource
+      description: |
+        POST using `multipart/form-data` to upload a file.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the resource metadata updated
+  "/action/resource_patch":
+    post:
+      summary: Update only specific fields of an existing resource
+      description: |
+        Any fields not passed will retain their original values.
+
+        POST using `multipart/form-data` to upload a file.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: a copy of the resource metadata updated
 components:
   schemas: {}
   securitySchemes:
