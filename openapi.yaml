@@ -388,6 +388,27 @@ paths:
                   $ref: 'schemas/dataset-en.json#/properties/resources/items'
                 fr:
                   $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+  "/action/scheming_dataset_schema_show":
+    get:
+      summary: Return the schema for a dataset type
+      description: |
+        Dataset metadata schemas are defined in the [ckanext-scheming](https://github.com/ckan/ckanext-scheming)
+        format.
+      parameters:
+      - name: type
+        in: query
+        description: The dataset type
+        schema:
+          type: string
+          default: dataset
+          enum:
+           - dataset
+           - info
+      tags:
+      - action
+      responses:
+        '200':
+          description: Returns metadata schema
   "/action/package_create":
     post:
       summary: Create a new dataset (package)
