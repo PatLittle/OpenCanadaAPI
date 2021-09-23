@@ -30,6 +30,9 @@ def convert_post_to_get_params(post):
     props = post['requestBody']['content']['application/json']['schema']['properties']
     params = []
     for k, v in props.items():
+        if 'oneOf' in v:
+            # XXX: assume first version is the string version of the parameter
+            v = v['oneOf'][0]
         p = {
             'name': k,
             'in': 'query',
