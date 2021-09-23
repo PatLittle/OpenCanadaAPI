@@ -454,9 +454,7 @@ paths:
                 sort:
                   type: string
                   description: comma-separated string of column names with sort order
-                  example:
-                    Two-column sort:
-                      value: key1, key2 desc
+                  example: key1, key2 desc
                 include_total:
                   type: boolean
                   description: calculate and return the total number of matching rows, set to false for improved performance
