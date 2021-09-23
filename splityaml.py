@@ -47,7 +47,7 @@ def convert_post_to_get_params(post):
         if 'default' in v:
             p['schema']['default'] = v.pop('default')
         if 'enum' in v:
-            p['enum'] = v['enum']
+            p['schema']['enum'] = v['enum']
         params.append(p)
 
     return {
