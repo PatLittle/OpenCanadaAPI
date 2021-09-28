@@ -407,25 +407,16 @@ paths:
                   type: string
                   format: uuid
                   description: id or alias of the resource to be searched against
+                  example: 499383b6-cd2a-466a-9fcf-910d3e427700
                 filters:
                   type: object
-                  description: matching conditions to select
-                  examples:
-                    Filter on two columns:
-                      value:
-                        key1: a
-                        key2: b
+                  description: matching conditions to select, `application/json` POST requests only
                 q:
                   oneOf:
                   - type: string
                     description: full text query searching across all columns in each row
                   - type: object
                     description: fill text search on each field given
-#                    examples:
-#                      Search on two columns:
-#                        value:
-#                          key1: a
-#                          key2: b
                 distinct:
                   type: boolean
                   description: return only distinct rows
@@ -454,7 +445,7 @@ paths:
                 sort:
                   type: string
                   description: comma-separated string of column names with sort order
-                  example: key1, key2 desc
+                  example: reporting_period desc, line_number
                 include_total:
                   type: boolean
                   description: calculate and return the total number of matching rows, set to false for improved performance
@@ -462,12 +453,31 @@ paths:
                 records_format:
                   type: string
                   description: the format for the records return value, set to `csv` or `tsv` for improved performance
+                  default: objects
                   enum:
                   - objects
                   - lists
                   - csv
                   - tsv
-                  default: objects
+            examples:
+              Chairs of Audit Committees in BC in 2019-2020:
+                value:
+                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  q: 2019-2020
+                  filters:
+                    province: BC
+                    role: C-P
+              10 Most Recently Deleted Datasets:
+                value:
+                  resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                  sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
+              Provinces and Territories, Abbreviations Only:
+                value:
+                  resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                  fields:
+                  - code
+                  - ab_en
+                  - ab_fr
       tags:
       - action
       responses:
@@ -487,8 +497,8 @@ paths:
           type: string
           default: dataset
           enum:
-           - dataset
-           - info
+          - dataset
+          - info
       tags:
       - action
       responses:
