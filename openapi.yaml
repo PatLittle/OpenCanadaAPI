@@ -407,10 +407,19 @@ paths:
                   type: string
                   format: uuid
                   description: id or alias of the resource to be searched against
-                  example: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  examples:
+                    Departmental Audit Committees:
+                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    Provinces and Territories:
+                      value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                    Deleted Datasets:
+                      value: d22d2aca-155b-4978-b5c1-1d39837e1993
                 filters:
                   type: object
                   description: matching conditions to select, `application/json` POST requests only
+                  examples:
+                    (Value not supported for GET requests):
+                      value: ''
                 q:
                   oneOf:
                   - type: string
