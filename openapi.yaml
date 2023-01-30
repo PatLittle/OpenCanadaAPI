@@ -492,6 +492,57 @@ paths:
       responses:
         '200':
           description: List of packages (datasets) including all metadata available.
+  "/action/datastore_records_delete":
+    post:
+      summary: Deletes records from a DataStore table
+      description: |
+        The datastore_records_delete action allows you to delete a set of data in a resource.
+
+        It will never remove the table itself.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_id:
+                  type: string
+                  format: uuid
+                  description: id or alias of the resource to be searched against
+                  required: true
+                  examples:
+                    Departmental Audit Committees:
+                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    Provinces and Territories:
+                      value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                filters:
+                  type: object
+                  description: matching conditions to select, `application/json` POST requests only
+                  required: true
+                  examples:
+                    value:
+                      province: 'ON'
+            examples:
+              Chairs of Audit Committees in BC in 2019-2020:
+                value:
+                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  filters:
+                    province: BC
+                    role: C-P
+              Provinces and Territories, Abbreviations Only:
+                value:
+                  resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                  filters:
+                    province:
+                      - BC
+                      - AB
+                      - SK
+      tags:
+      - action
+      responses:
+        '200':
+          description: Dict of original filters.
   "/action/scheming_dataset_schema_show":
     get:
       summary: Return the schema for a dataset type
