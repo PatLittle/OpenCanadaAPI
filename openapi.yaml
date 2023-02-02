@@ -512,6 +512,7 @@ paths:
                   description: id or alias of the resource to be searched against
                 filters:
                   type: object
+                  format: dictionary
                   description: matching conditions to select, `application/json` POST requests only
             examples:
               Deleted ATI Summaries from December 2016:
@@ -533,6 +534,10 @@ paths:
                       - US
                       - AU
                       - BE
+              Delete All Hospitality Expenses:
+                value:
+                  resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
+                  filters: {}
       tags:
       - action
       responses:
