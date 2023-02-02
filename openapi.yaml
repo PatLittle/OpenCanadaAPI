@@ -512,7 +512,6 @@ paths:
                   description: id or alias of the resource to be searched against
                 filters:
                   type: object
-                  format: dictionary
                   description: matching conditions to select, `application/json` POST requests only
             examples:
               Deleted ATI Summaries from December 2016:
