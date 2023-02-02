@@ -1,10 +1,5 @@
-name: deploy-docs
-
-# Only run this when the master branch changes
-on:
-  push:
-    branches:
-    - main
+name: Compile, Test, & Deploy
+on: [push, pull_request]
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -36,6 +31,8 @@ jobs:
         cp index.html index-en.html index-fr.html _build
 
     - name: GitHub Pages action
+      # only deploys to gh-pages if ref is main branch
+      if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -510,34 +510,29 @@ paths:
                   type: string
                   format: uuid
                   description: id or alias of the resource to be searched against
-                  required: true
-                  examples:
-                    Departmental Audit Committees:
-                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
-                    Provinces and Territories:
-                      value: 4cb827a6-a313-4d97-a66b-26fe23984931
                 filters:
                   type: object
                   description: matching conditions to select, `application/json` POST requests only
-                  required: true
-                  examples:
-                    value:
-                      province: 'ON'
             examples:
-              Chairs of Audit Committees in BC in 2019-2020:
+              Deleted ATI Summaries from December 2016:
                 value:
-                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
                   filters:
-                    province: BC
-                    role: C-P
-              Provinces and Territories, Abbreviations Only:
+                    year: 2016
+                    month: 12
+              Delete Travel Expenses by Reference Number:
                 value:
-                  resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                  resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
                   filters:
-                    province:
-                      - BC
-                      - AB
-                      - SK
+                    reference_number: 2023-Q1-0010
+              Delete Grants and Contributions by Recipient Counrty:
+                value:
+                  resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
+                  filters:
+                    recipient_country:
+                      - US
+                      - AU
+                      - BE
       tags:
       - action
       responses:
