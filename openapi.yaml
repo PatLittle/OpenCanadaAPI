@@ -16,24 +16,43 @@ servers:
 
 info:
   title: Open Government CKAN API
-  description: |
-    This API provides live access to the CKAN portion of the Open Government Portal and Registry systems.
+  description: 
+    en: |
+      This API provides live access to the CKAN portion of the Open Government Portal and Registry systems.
 
-    - Portal: https://open.canada.ca
-      - our public data portal
-      - includes data federated from provinces and municipalities
-      - read-only API calls can be made without an API key
-      - authorization required only for publishing federated data
+      - Portal: https://open.canada.ca
+        - our public data portal
+        - includes data federated from provinces and municipalities
+        - read-only API calls can be made without an API key
+        - authorization required only for publishing federated data
 
-    - Registry: https://registry.open.canada.ca
-      - accessible within the Government of Canada (GoC) network
-      - for collecting and publishing data from GoC departments
-      - new datasets must be manually reviewed and approved by the Open Government team
-      - publishes approved datasets to the Production Portal automatically
-      - user account or API key required for all operations
+      - Registry: https://registry.open.canada.ca
+        - accessible within the Government of Canada (GoC) network
+        - for collecting and publishing data from GoC departments
+        - new datasets must be manually reviewed and approved by the Open Government team
+        - publishes approved datasets to the Production Portal automatically
+        - user account or API key required for all operations
 
-    Our Staging sites are for sharing upcoming features and testing integration, and Test sites
-    are for features in development.
+      Our Staging sites are for sharing upcoming features and testing integration, and Test sites
+      are for features in development.
+    fr: |
+      Cette interface de programmation d’applications (API) permet d’accéder en direct à la partie CKAN du portail et des systèmes de registre du gouvernement ouvert. 
+ 
+      - Portail : https://open.canada.ca/fr 
+        - Notre portail de données publiques. 
+        - Il inclut des données fédérées par les provinces et les municipalités. 
+        - Des appels API en lecture seule peuvent être effectués sans clé API. 
+        - Une autorisation est requise uniquement pour la publication de données fédérées. 
+      
+      - Registre : https://registry.open.canada.ca/fr 
+        - Il est accessible dans le réseau du gouvernement du Canada (GC). 
+        - Il permet la collecte et la publication de données provenant des ministères du GC.
+        - Les nouveaux jeux de données doivent être examinés et approuvés manuellement par l’équipe du gouvernement ouvert. 
+        - Il permet la publication automatique des jeux de données approuvés sur le portail de production. 
+        - Un compte d’utilisateur ou une clé API est nécessaire pour toutes les opérations. 
+      
+      Nos sites de préparation servent à partager les fonctionnalités à venir et à tester l’intégration, et nos sites d’essai sont destinés aux fonctionnalités en cours d’élaboration. 
+
 
   termsOfService: https://open.canada.ca/en/open-government-licence-canada
   contact:
