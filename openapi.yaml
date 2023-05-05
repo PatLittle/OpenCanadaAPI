@@ -103,67 +103,68 @@ tags:
 
       All endpoints support POST requests with an `application/json` or a
         `multipart/form-data` body.
-    -   Use an `application/json` POST request when nested json parameters
+      -   Use an `application/json` POST request when nested json parameters
         are required
-    -   Use a `multipart/form-data` POST request when file uploads are required
+      -   Use a `multipart/form-data` POST request when file uploads are required
 
       Read-only endpoints (`*_show`, `*_list`, `*_search` etc.)
       accept GET requests with query parameters.
+      
+      Responses are returned in a JSON envelope on success:
+      ```json
+      {
+        "help": "url to complete endpoint help",
+        "success": true,
+        "result": {...}
+      }
+      ```
+      or on errors:
+      ```json
+      {
+        "help": "url to complete endpoint help",
+        "success": false,
+        "error": {
+          "__type": "error type",
+          "message": "error message",
+          "field-with-error": ["first-error", "second-error"],
+          ...
+        }
+      }
+      ```
     fr: |
       ### L’API d’action de CKAN est une puissante API de type appel de procédure à distance qui expose toutes les fonctionnalités de base de CKAN. 
  
       Tous les points terminaux prennent en charge les demandes POST avec un corps « application/json » ou un corps 
         « multipart/form-data ». 
--       Utiliser une demande POST « application/json » lorsque des paramètres json imbriqués sont nécessaires. 
--       Utiliser une demande POST « multipart/form-data » lorsque des téléchargements de fichiers sont nécessaires. 
+      -   Utiliser une demande POST « application/json » lorsque des paramètres json imbriqués sont nécessaires. 
+      -   Utiliser une demande POST « multipart/form-data » lorsque des téléchargements de fichiers sont nécessaires. 
  
       Points terminaux en lecture seule (« *_montrer », « *_liste », « *_recherche », etc.) 
       Accepter les demandes d’obtention de données (GET) avec des paramètres de requête. 
  
-Les réponses sont renvoyées dans une enveloppe JSON en cas de succès : 
-« `json 
-{ 
-  “aide” : “url pour compléter l’aide sur les points terminaux”, 
-  “succès” : vrai, 
-  “résultat” : {…} 
-} 
- » 
-Ou sur les erreurs : 
-« `json 
-{ 
-  ‘aide’ : ‘url pour compléter l’aide sur les points terminaux’,
-  ‘succès’ : faux, 
-  ‘erreur’ : { 
-    ‘__type’ : ‘type d’erreur’, 
-    ‘message’ : ‘message d’erreur’, 
-    ‘champ-avec-erreur’ : [‘première-erreur’, ‘seconde-erreur’], 
-    … 
-  } 
-} 
- » 
+      Les réponses sont renvoyées dans une enveloppe JSON en cas de succès : 
+      « `json :
+      { 
+        “aide” : “url pour compléter l’aide sur les points terminaux”, 
+        “succès” : vrai, 
+        “résultat” : {…} 
+      } 
+      » 
+      Ou sur les erreurs : 
+      « `json :
+      { 
+        ‘aide’ : ‘url pour compléter l’aide sur les points terminaux’,
+        ‘succès’ : faux, 
+        ‘erreur’ : { 
+          ‘__type’ : ‘type d’erreur’, 
+          ‘message’ : ‘message d’erreur’, 
+          ‘champ-avec-erreur’ : [‘première-erreur’, ‘seconde-erreur’], 
+          … 
+        } 
+      } 
+      » 
 
 
-    Responses are returned in a JSON envelope on success:
-    ```json
-    {
-      "help": "url to complete endpoint help",
-      "success": true,
-      "result": {...}
-    }
-    ```
-    or on errors:
-    ```json
-    {
-      "help": "url to complete endpoint help",
-      "success": false,
-      "error": {
-        "__type": "error type",
-        "message": "error message",
-        "field-with-error": ["first-error", "second-error"],
-        ...
-      }
-    }
-    ```
 
   externalDocs:
     description:
@@ -355,7 +356,7 @@ paths:
           en: |
             The package UUID
           fr: |
-          Le IDUU de paquetage.
+            Le IDUU de paquetage.
         schema:
           type: string
           format: uuid
@@ -395,7 +396,7 @@ paths:
           en: |
             The package UUID
           fr: |
-          Le IDUU de paquetage.
+            Le IDUU de paquetage.
         schema:
           type: string
           default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
@@ -746,9 +747,9 @@ paths:
                   type: object
                   description:
                   en: |
-                   matching conditions to select, `application/json` POST requests only
+                    matching conditions to select, `application/json` POST requests only
                   fr: |
-                  Conditions de correspondance à sélectionner, demandes de publication de données « application/json » uniquement 
+                    Conditions de correspondance à sélectionner, demandes de publication de données « application/json » uniquement 
 
                   examples:
                     (Value not supported for GET requests):
@@ -887,12 +888,10 @@ paths:
       description: 
         en: |
           The datastore_records_delete action allows you to delete a set of data in a resource.
+          It will never remove the table itself.
         fr: |
           L’action datastore_records_delete permet de supprimer un jeu de données dans une ressource. 
-          Cela ne supprimera jamais le tableau lui-même. 
-
-
-        It will never remove the table itself.
+          Cela ne supprimera jamais le tableau lui-même.
       requestBody:
         required: true
         content:
