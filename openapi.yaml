@@ -134,35 +134,35 @@ tags:
     fr: |
       ### L’API d’action de CKAN est une puissante API de type appel de procédure à distance qui expose toutes les fonctionnalités de base de CKAN. 
  
-      Tous les points terminaux prennent en charge les demandes POST avec un corps « application/json » ou un corps 
-        « multipart/form-data ». 
-      -   Utiliser une demande POST « application/json » lorsque des paramètres json imbriqués sont nécessaires. 
-      -   Utiliser une demande POST « multipart/form-data » lorsque des téléchargements de fichiers sont nécessaires. 
+      Tous les points terminaux prennent en charge les demandes POST avec un corps `application/json` ou un corps 
+         `multipart/form-data`. 
+      -   Utiliser une demande POST `application/json` lorsque des paramètres json imbriqués sont nécessaires. 
+      -   Utiliser une demande POST `multipart/form-data` lorsque des téléchargements de fichiers sont nécessaires. 
  
-      Points terminaux en lecture seule (« *_montrer », « *_liste », « *_recherche », etc.) 
+      Points terminaux en lecture seule (`*_show`, `*_list`, `*_search` etc.) 
       Accepter les demandes d’obtention de données (GET) avec des paramètres de requête. 
  
       Les réponses sont renvoyées dans une enveloppe JSON en cas de succès : 
-      « `json :
+      ```json
       { 
-        “aide” : “url pour compléter l’aide sur les points terminaux”, 
-        “succès” : vrai, 
-        “résultat” : {…} 
+        "help": "url pour compléter l’aide sur les points terminaux", 
+        "success": true, 
+        "result": {…} 
       } 
-      » 
+      ```
       Ou sur les erreurs : 
-      « `json :
+      ```json
       { 
-        ‘aide’ : ‘url pour compléter l’aide sur les points terminaux’,
-        ‘succès’ : faux, 
-        ‘erreur’ : { 
-          ‘__type’ : ‘type d’erreur’, 
-          ‘message’ : ‘message d’erreur’, 
-          ‘champ-avec-erreur’ : [‘première-erreur’, ‘seconde-erreur’], 
+        "help": "url pour compléter l’aide sur les points terminaux",
+        "success": false, 
+        "error": { 
+          "__type": "type d’erreur", 
+          "message": "message d’erreur", 
+          "champ-avec-erreur": ["première-erreur", "seconde-erreur"], 
           … 
         } 
       } 
-      » 
+      ```
 
 
 
@@ -209,7 +209,7 @@ paths:
         en: |
           Note: our site uses the same value for the "name" and "id" fields of datasets
         fr: |
-          Remarque : notre site utilise la même valeur pour les champs « nom » et « identifiant » des jeux de données 
+          Remarque : notre site utilise la même valeur pour les champs « name » (nom) et « id » (identifiant) des jeux de données 
       tags:
       - action
       responses:
@@ -283,16 +283,16 @@ paths:
                       Sort order for the search results, defaults to `score desc, metadata_modified desc`
                       meaning sort by query score order, and with no query sort by most recently modified.
                     fr: |
-                      Ordre de tri des résultats de la recherche, la valeur par défaut « score desc, metadata_modified desc » 
+                      Ordre de tri des résultats de la recherche, la valeur par défaut `score desc, metadata_modified desc` 
                       ce qui signifie que les résultats sont triés en fonction de la note attribuée à la requête et, en l’absence de requête, en fonction de la modification la plus récente. 
 
                 rows:
                   type: integer
                   description: 
-                  en: |
-                    Maximum rows to return, clamped to 1000
-                  fr: |
-                    Nombre maximal de lignes à renvoyer, limité à 1 000.
+                    en: |
+                      Maximum rows to return, clamped to 1000
+                    fr: |
+                      Nombre maximal de lignes à renvoyer, limité à 1 000.
                   default: 20
                 start:
                   type: integer
@@ -308,7 +308,7 @@ paths:
                       Must be set to `true` to retrieve results on the Registry,
                       no effect on the Portal
                     fr: |
-                      Doit être établi à « vrai » pour récupérer les résultats sur le Registre, aucun effet sur le portail.   
+                      Doit être établi à `true` pour récupérer les résultats sur le Registre, aucun effet sur le portail.   
             examples:
               10 most recently modified datasets:
                 value:
@@ -346,7 +346,7 @@ paths:
           for information about the metadata fields returned.
         fr: |
           Renvoie les métadonnées du paquetage (jeu de données) correspondant à son IDUU (identifiant unique universel).
-          Se référer au [schéma de données ouvert (type=jeu de données)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
           ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
           pour obtenir des renseignements sur les champs de métadonnées renvoyés. 
       parameters:
@@ -546,10 +546,10 @@ paths:
       - name: id
         in: query
         description: 
-        en: |
-          The id or name (short form) of the organization
-        fr: |
-          L’identifiant ou le nom (forme courte) de l’organisation. 
+          en: |
+            The id or name (short form) of the organization
+          fr: |
+            L’identifiant ou le nom (forme courte) de l’organisation. 
         schema:
           type: string
           default: tbs-sct
@@ -558,10 +558,10 @@ paths:
       responses:
         '200':
           description: 
-          en: |
-            List organization details
-          fr: |
-            Liste des détails de l’organisation. 
+            en: |
+              List organization details
+            fr: |
+              Liste des détails de l’organisation. 
   "/action/organization_list":
     get:
       summary: 
@@ -607,7 +607,7 @@ paths:
           en: |
             The search criteria string or list of strings of the form ``{field}:{term1}``
           fr: |
-            La chaîne de critères de recherche ou une liste de chaînes du format « {champ}:{term1} ».
+            La chaîne de critères de recherche ou une liste de chaînes du format ``{champ}:{term1}``.
         schema:
           type: string
           default: format:csv
@@ -633,10 +633,10 @@ paths:
       - name: limit
         in: query
         description: 
-        en: |
-          Apply a limit to the query
-        fr: |
-          Appliquer une limite à la requête.
+          en: |
+            Apply a limit to the query
+          fr: |
+            Appliquer une limite à la requête.
         schema:
           type: integer
           default: 0
@@ -746,10 +746,10 @@ paths:
                 filters:
                   type: object
                   description:
-                  en: |
-                    matching conditions to select, `application/json` POST requests only
-                  fr: |
-                    Conditions de correspondance à sélectionner, demandes de publication de données « application/json » uniquement 
+                    en: |
+                      matching conditions to select, `application/json` POST requests only
+                    fr: |
+                      Conditions de correspondance à sélectionner, demandes de publication de données `application/json` uniquement 
 
                   examples:
                     (Value not supported for GET requests):
@@ -833,9 +833,9 @@ paths:
                   type: boolean
                   description: 
                     en: |
-                      calculate and return the total number of matching rows, set to false for improved performance
+                      calculate and return the total number of matching rows, set to `false` for improved performance
                     fr: | 
-                      Calculer et renvoyer le nombre total de lignes correspondantes, établi à faux pour améliorer les performances. 
+                      Calculer et renvoyer le nombre total de lignes correspondantes, établi à `false` pour améliorer les performances. 
                   default: true
                 records_format:
                   type: string
@@ -843,7 +843,7 @@ paths:
                     en: |
                       the format for the records return value, set to `csv` or `tsv` for improved performance
                     fr: |
-                      Le format de la valeur de retour des dossiers, établi à « csv » ou « tsv » pour de meilleures performances. 
+                      Le format de la valeur de retour des dossiers, établi à `csv` ou `tsv` pour de meilleures performances. 
                   default: objects
                   enum:
                   - objects
@@ -913,7 +913,7 @@ paths:
                     en: |
                       matching conditions to select, `application/json` POST requests only
                     fr: |
-                      Conditions de correspondance à sélectionner, demandes POST « application/json » uniquement. 
+                      Conditions de correspondance à sélectionner, demandes POST `application/json` uniquement. 
             examples:
               Deleted ATI Summaries from December 2016:
                 value:
@@ -943,10 +943,10 @@ paths:
       responses:
         '200':
           description: 
-          en: | 
-            Dict of original filters.
-          fr: |
-            Dictionnaire des filtres originaux 
+            en: | 
+              Dict of original filters.
+            fr: |
+              Dictionnaire des filtres originaux 
   "/action/scheming_dataset_schema_show":
     get:
       summary: 
@@ -1000,9 +1000,9 @@ paths:
         fr: |
           Tous les champs non transmis conserveront leurs valeurs initiales. 
  
-          Les champs exacts disponibles dépendent du paramètre « type ». 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
  
-          Se référer au [schéma de données ouvert (type=jeu de données)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
           ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
           pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
       requestBody:
@@ -1040,9 +1040,9 @@ paths:
         fr: |
           Tous les champs non transmis conserveront leurs valeurs initiales. 
  
-          Les champs exacts disponibles dépendent du paramètre « type ». 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
  
-          Se référer au [schéma de données ouvert (type=jeu de données)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
           ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
           pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
 
@@ -1083,9 +1083,9 @@ paths:
         fr: |
           Tous les champs non transmis conserveront leurs valeurs initiales. 
  
-          Les champs exacts disponibles dépendent du paramètre « type ». 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
  
-          Se référer au [schéma de données ouvert (type=jeu de données)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
           ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
           pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
 
@@ -1129,10 +1129,10 @@ paths:
                   type: string
                   format: uuid
                   description: 
-                  en: | 
-                    The id of the dataset
-                  fr: |
-                    L’identifiant du jeu de données. 
+                    en: | 
+                      The id of the dataset
+                    fr: |
+                      L’identifiant du jeu de données. 
       tags:
       - action
       responses:
@@ -1141,7 +1141,7 @@ paths:
             en: |
               'null'
             fr: |
-              'nul'
+              'null'
   "/action/resource_create":
     post:
       summary: 
@@ -1150,10 +1150,10 @@ paths:
         fr: |
           Créer une nouvelle ressource. 
       description: 
-      en: |
-        Add a resource to a dataset (package). POST using `multipart/form-data` to upload a file.
-      fr: |
-        Ajouter une ressource à un jeu de données (paquet). POST utilisant « multipart/form-data » pour télécharger un fichier. 
+        en: |
+          Add a resource to a dataset (package). POST using `multipart/form-data` to upload a file.
+        fr: |
+          Ajouter une ressource à un jeu de données (paquet). POST utilisant `multipart/form-data` pour télécharger un fichier. 
       requestBody:
         content:
           application/json:
@@ -1173,10 +1173,10 @@ paths:
       responses:
         '200':
           description: 
-          en: |
-            a copy of the resource metadata created
-          fr: |
-            Une copie des métadonnées de la ressource créées 
+            en: |
+              a copy of the resource metadata created
+            fr: |
+              Une copie des métadonnées de la ressource créées 
   "/action/resource_update":
     post:
       summary: 
@@ -1188,7 +1188,7 @@ paths:
         en: |
           POST using `multipart/form-data` to upload a file.
         fr: |
-          POST en utilisant « multipart/form-data » pour télécharger un fichier. 
+          POST en utilisant `multipart/form-data` pour télécharger un fichier. 
       requestBody:
         content:
           application/json:
@@ -1227,7 +1227,7 @@ paths:
         fr: |
           Tous les champs non transmis conserveront leur valeur initiale. 
  
-          POST en utilisant « multipart/form-data » pour télécharger un fichier. 
+          POST en utilisant `multipart/form-data` pour télécharger un fichier. 
 
       requestBody:
         content:
@@ -1274,10 +1274,10 @@ paths:
                   type: string
                   format: uuid
                   description: 
-                  en: |
-                    The id of the resource
-                  fr: |
-                    L’identifiant de la ressource. 
+                    en: |
+                      The id of the resource
+                    fr: |
+                      L’identifiant de la ressource. 
       tags:
       - action
       responses:
@@ -1286,7 +1286,7 @@ paths:
             en: |
               'null'
             fr: |
-              'nul'
+              'null'
 components:
   schemas: {}
   securitySchemes:
