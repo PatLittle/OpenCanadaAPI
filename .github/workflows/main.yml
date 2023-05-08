@@ -19,16 +19,20 @@ jobs:
 
     - name: split the yaml
       run: |
-        mkdir _build
-        python splityaml.py openapi.yaml en _build/openapi-en.json
-        python splityaml.py openapi.yaml fr _build/openapi-fr.json
+        mkdir _build _build/en _build/fr _build/theme
+        python splityaml.py openapi.yaml en _build/en/openapi-en.json
+        python splityaml.py openapi.yaml fr _build/fr/openapi-fr.json
 
     - name: Test that our specs are valid
       run: |
         cp -r schemas _build
-        openapi-spec-validator _build/openapi-en.json
-        openapi-spec-validator _build/openapi-fr.json
-        cp index.html index-en.html index-fr.html _build
+        openapi-spec-validator _build/en/openapi-en.json
+        openapi-spec-validator _build/fr/openapi-fr.json
+        cp index.html _build && cp index-en.html _build/en && cp index-fr.html _build/fr
+
+    - name: Download and unpack the theme
+      run: |
+        curl -L "https://github.com/wet-boew/themes-cdn/archive/v11.0.0-gcweb.tar.gz" | tar -zvx --strip-components 1 --directory=_build/theme
 
     - name: GitHub Pages action
       # only deploys to gh-pages if ref is main branch
