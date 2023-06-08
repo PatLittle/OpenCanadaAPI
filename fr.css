@@ -1,0 +1,398 @@
+/*Terms of Service link*/
+.swagger-ui .info__tos a {
+    visibility: hidden;
+}
+.swagger-ui .info__tos a::before {
+    visibility: visible;
+    content: "Mandat";
+}
+
+/*Open Government License - Canada link */
+.swagger-ui .info__license a {
+    visibility: hidden;
+}
+.swagger-ui .info__license a::before {
+    visibility: visible;
+    content: "Licence du gouvernement ouvert - Canada";
+}
+
+/*Authorize button*/
+.swagger-ui .scheme-container .btn.authorize.unlocked span {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .scheme-container .btn.authorize.unlockedc span::before {
+    visibility: visible;
+    content: "Autoriser";
+    font-size: 14px;
+}
+
+/*Available Authorizations header*/
+.swagger-ui .modal-ux-header h3 {
+    visibility: hidden;
+}
+.swagger-ui .modal-ux-header h3::before {
+    visibility: visible;
+    content: "Autorisations disponibles";
+}
+
+/*Name: Authorization label*/
+.swagger-ui .auth-container .wrapper:nth-of-type(2) p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(2) p::before {
+    visibility: visible;
+    content: "Nom: ";
+    font-size: 12px;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(2) code {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(2) code::before {
+    visibility: visible;
+    content: "Autorisation";
+    font-size: 12px;
+}
+
+/*In: Header label*/
+.swagger-ui .auth-container .wrapper:nth-of-type(3) p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(3) p::before {
+    visibility: visible;
+    content: "Dans: ";
+    font-size: 12px;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(3) code {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(3) code::before {
+    visibility: visible;
+    content: "en-t\00EA te";
+    font-size: 12px;
+}
+
+/*Value: label*/
+.swagger-ui .auth-container .wrapper:nth-of-type(4) label {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .auth-container .wrapper:nth-of-type(4) label::before {
+    visibility: visible;
+    content: "Valeur:";
+    font-size: 12px;
+}
+
+/*Authorizse (Submit) button*/
+.swagger-ui .auth-btn-wrapper button.btn.modal-btn.auth.authorize.button {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .auth-btn-wrapper button.btn.modal-btn.auth.authorize.button::before {
+    content: "Autoriser";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Authorize (Close) button*/
+.swagger-ui .auth-btn-wrapper button.btn.modal-btn.auth.btn-done.button {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .auth-btn-wrapper button.btn.modal-btn.auth.btn-done.button::before {
+    content: "Fermer";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Servers label*/
+.swagger-ui .scheme-container span {
+    visibility: hidden;
+}
+.swagger-ui .scheme-container span::before {
+    visibility: visible;
+    content: "Serveurs";
+}
+
+/*action label - action is the same for En & Fr thus translation is redundant
+
+
+/*Parameters label*/
+.swagger-ui .tab-item.active span {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .tab-item.active span::before {
+    visibility: visible;
+    content: "Param\00E8tres";
+    font-size: 14px;
+}
+
+/*Code label - Code is the same for En & Fr thus translation is redundant.*/
+
+
+/*Responses label*/
+.swagger-ui .responses-wrapper h4 {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .responses-wrapper h4::before {
+    visibility: visible;
+    content: "R\00E9ponses";
+    font-size: 14px;
+}
+
+/*Description label - Description is the same for En & Fr thus translation is redundant.*/
+
+
+/*Links label*/
+.swagger-ui .responses-header td.col.col_header.response-col_links {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .responses-header td.col.col_header.response-col_links::before {
+    visibility: visible;
+    content: "Liens";
+    font-size: 14px;
+}
+
+/*No links label*/
+.swagger-ui .response  .response-col_links i {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .response  .response-col_links i::before {
+    visibility: visible;
+    content: "Aucun lien";
+    font-size: 14px;
+}
+
+/*No parameters label*/
+.swagger-ui .parameters-container .opblock-description-wrapper p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameters-container .opblock-description-wrapper p::before {
+    visibility: visible;
+    content: "Aucun param\00E8tre";
+    font-size: 14px;
+}
+
+/*Try it out label*/
+.swagger-ui .try-out button.btn.try-out__btn {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .try-out button.btn.try-out__btn::before {
+    content: "\00C0\0020 essayer";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Try it out (Cancel) button*/
+.swagger-ui .try-out button.btn.try-out__btn.cancel {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .try-out button.btn.try-out__btn.cancel::before {
+    content: "Annuler";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Sample label - Cannot find on page
+.swagger-ui .parameters-container p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameters-container p::before {
+    visibility: visible;
+    content: "Aucun param\00E8tre";
+    font-size: 14px;
+}*/
+
+/*Execute button*/
+.swagger-ui .execute-wrapper button.btn.execute.opblock-control__btn {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .execute-wrapper button.btn.execute.opblock-control__btn::before {
+    content: "Ex\00E8 cuter";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Execute (submit) button*/
+.swagger-ui .btn-group button.btn.execute.opblock-control__btn {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .btn-group button.btn.execute.opblock-control__btn::before {
+    content: "Ex\00E8 cuter";                                          /*<---Translation to FR Needed*/
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Execute (Clear) button*/
+.swagger-ui .btn-group button.btn.btn-clear.opblock-control__btn {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .btn-group button.btn.btn-clear.opblock-control__btn::before {
+    content: "Clear";                                                   /*<---Translation to FR Needed*/
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Request body label*/
+.swagger-ui .opblock-section.opblock-section-request-body h4 {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .opblock-section.opblock-section-request-body h4::before {
+    content: "Corps de la demande";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*10 most recent modified data sets selections
+.swagger-ui .examples-select-element option:nth-of-type(1) {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .examples-select-element option:nth-of-type(1)::before {
+    content: "Dix jeux de donn\00E9\0020 es modifi\00E9\0020 s les plus r\00E9\0020 cents";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}*/
+
+/*Three datasets that best match "water use"
+.swagger-ui .examples-select-element .option:nth-of-type(2) {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .examples-select-element option:nth-of-type(2)::before {
+    content: "Trois jeux de données qui correspondent le mieux à « utilisation de l’eau »";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}/*
+
+/*Datasets 101-120 by last modified date
+.swagger-ui .examples-select-element .option:nth-of-type(3) {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .examples-select-element option:nth-of-type(3)::before {
+    content: "Jeux de données 101-120 classés par date de la dernière modification";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}/*
+
+/*Example value button*/
+.swagger-ui .model-example li.tabitem.active button {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .model-example li.tabitem.active button::before {
+    content: "Exemple de valeur";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Schema button*/
+.swagger-ui .model-example li.tabitem button {
+    text-indent: -100vw !important;
+    line-height: 0;
+    font-size: 0;
+}
+.swagger-ui .model-example li.tabitem button::before {
+    content: "Sch\00E9 ma";
+    text-indent: 0 !important;
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+
+/*Default value : tbs-sct selector
+.swagger-ui .parameters-col_description .parameter_default.renderedMarkdown:nth-of-type(2) p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameters-col_description .parameter_default.renderedMarkdown:nth-of-type(2) p::before {
+    visibility: visible;
+    content: "Valeur par d\00E9 faut: tbs-sct";
+    font-size: 14px;
+}*/
+
+/*Available values : dataset, info selector
+.swagger-ui .parameter__enum.renderedMarkdown p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameter__enum.renderedMarkdown p::before {
+    visibility: visible;
+    content: "Valeurs disponibles: jeu de donn\00E9 es, renseignements";
+    font-size: 14px;
+}*/
+
+/*Default value : dataset selector
+.swagger-ui .parameters-col_description .parameter__default.renderedMarkdown:nth-of-type(3) p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameters-col_description .parameter__default.renderedMarkdown:nth-of-type(3) p::before {
+    visibility: visible;
+    content: "Valeur par d\00E9 faut: jeu de donn\00E9 es";
+    font-size: 14px;
+}*/
+
+/*Default value : e6c8bb1d-3726-418b-9b7e-1d97a9bbb817 selector
+.swagger-ui .parameter__default.renderedMarkdown:nth-of-type(2) p {
+    visibility: hidden;
+    font-size: 0;
+}
+.swagger-ui .parameter__default.renderedMarkdown:nth-of-type(2) p::before {
+    visibility: visible;
+    content: "Valeur par d\00E9 faut: e6c8bb1d-3726-418b-9b7e-1d97a9bbb817";
+    font-size: 14px;
+}*/

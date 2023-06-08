@@ -168,18 +168,32 @@ paths:
                     Must be set to `true` to retrieve results on the Registry,
                     no effect on the Portal
             examples:
-              10 most recently modified datasets:
-                value:
-                  rows: 10
-              3 datasets that best match "water use":
-                value:
-                  q: water use
-                  rows: 3
-              Datasets number 101-120 by last modified date:
-                value:
-                  sort: metadata_modified desc
-                  start: 100
-                  rows: 20
+              en:
+                10 most recently modified datasets:
+                  value:
+                    rows: 10
+                3 datasets that best match "water use":
+                  value:
+                    q: water use
+                    rows: 3
+                Datasets number 101-120 by last modified date:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20   
+              fr:
+                Dix jeux de données modifiés les plus récents:
+                  value:
+                    rows: 10
+                Trois jeux de données qui correspondent le mieux à « utilisation de l’eau »:
+                  value:
+                    q: water use
+                    rows: 3
+                Jeux de données 101-120 classés par date de la dernière modification:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20
       tags:
       - action
       responses:
