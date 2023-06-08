@@ -17,8 +17,8 @@ def split(d, lng):
             return d[lng]
         if d.keys() == {POST_GET}:
             return {
-                'get': convert_post_to_get_params(d[POST_GET]),
-                'post': d[POST_GET],
+                'get': split(convert_post_to_get_params(d[POST_GET]), lng),
+                'post': split(d[POST_GET], lng),
             }
     if isinstance(d, dict):
         return {k: split(v, lng) for (k, v) in d.items()}
