@@ -271,59 +271,22 @@
 
 /*Request body label*/
 .swagger-ui .opblock-section.opblock-section-request-body h4 {
-    text-indent: -100vw !important;
+    visibility: hidden;
     line-height: 0;
     font-size: 0;
 }
 .swagger-ui .opblock-section.opblock-section-request-body h4::before {
+    visibility: visible;
     content: "Corps de la demande";
-    text-indent: 0 !important;
-    display: block;
     line-height: 1;
     font-size: 14px;
 }
 
-/*10 most recent modified data sets selections
-.swagger-ui .examples-select-element option:nth-of-type(1) {
-    text-indent: -100vw !important;
-    line-height: 0;
-    font-size: 0;
+.swagger-ui .opblock-section.opblock-section-request-body h4::after {
+    visibility: visible;
 }
-.swagger-ui .examples-select-element option:nth-of-type(1)::before {
-    content: "Dix jeux de donn\00E9\0020 es modifi\00E9\0020 s les plus r\00E9\0020 cents";
-    text-indent: 0 !important;
-    display: block;
-    line-height: 1;
-    font-size: 14px;
-}*/
 
-/*Three datasets that best match "water use"
-.swagger-ui .examples-select-element .option:nth-of-type(2) {
-    text-indent: -100vw !important;
-    line-height: 0;
-    font-size: 0;
-}
-.swagger-ui .examples-select-element option:nth-of-type(2)::before {
-    content: "Trois jeux de données qui correspondent le mieux à « utilisation de l’eau »";
-    text-indent: 0 !important;
-    display: block;
-    line-height: 1;
-    font-size: 14px;
-}/*
-
-/*Datasets 101-120 by last modified date
-.swagger-ui .examples-select-element .option:nth-of-type(3) {
-    text-indent: -100vw !important;
-    line-height: 0;
-    font-size: 0;
-}
-.swagger-ui .examples-select-element option:nth-of-type(3)::before {
-    content: "Jeux de données 101-120 classés par date de la dernière modification";
-    text-indent: 0 !important;
-    display: block;
-    line-height: 1;
-    font-size: 14px;
-}/*
+/*Required label*/
 
 /*Example value button*/
 .swagger-ui .model-example li.tabitem.active button {
