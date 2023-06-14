@@ -562,7 +562,7 @@ paths:
               value: admin
             Éditeur:
               value: manage_group
-            Member:               #<---- Needs French Translation
+            Membre:
               value: read
       tags:
       - action
