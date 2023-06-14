@@ -282,11 +282,11 @@
     font-size: 14px;
 }
 
+/*Required label*/
 .swagger-ui .opblock-section.opblock-section-request-body h4::after {
     visibility: visible;
+    content: "Requis";
 }
-
-/*Required label*/
 
 /*Example value button*/
 .swagger-ui .model-example li.tabitem.active button {
