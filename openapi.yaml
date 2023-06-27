@@ -807,7 +807,7 @@ paths:
                       (Value not supported for GET requests):
                         value: ''
                     fr:
-                      (Valeur non supportée pour les requêtes OGE):
+                      (Valeur non supportée pour les requêtes GET):
                         value: ''
                 q:
                   oneOf:
