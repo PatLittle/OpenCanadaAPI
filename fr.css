@@ -106,9 +106,6 @@
     content: "Serveurs";
 }
 
-/*action label - action is the same for En & Fr thus translation is redundant
-
-
 /*Parameters Name header label*/
 .swagger-ui .parameters-container .col_header.parameters-col_name {
     visibility: hidden;
@@ -130,8 +127,6 @@
     content: "Nom";
     font-size: 12px;
 }
-
-/*Code label - Code is the same for En & Fr thus translation is redundant.*/
 
 /*Parameters label*/
 .swagger-ui .tab-item.active span {
@@ -193,7 +188,7 @@
 }
 .swagger-ui .responses-wrapper .responses-inner > div > div > div:not(.curl-command) h4::after {
     visibility: visible;
-    content: "Request URL FR"; /*TODO: <---Translation to FR Needed for: "Request URL"*/
+    content: "Demander l\00B4 adresse URL";
     font-size: 12px;
 }
 
@@ -208,28 +203,6 @@
     font-size: 12px;
 }
 
-/*Live Response - response body*/
-.swagger-ui .responses-wrapper .responses-inner .responses-table.live-responses-table .response-col_description > div:first-of-type h5 {
-    visibility: hidden;
-    font-size: 0;
-}
-.swagger-ui .responses-wrapper .responses-inner .responses-table.live-responses-table .response-col_description > div:first-of-type h5::after {
-    visibility: visible;
-    content: "Response body FR"; /*TODO: <---Translation to FR Needed for: "Response body"*/
-    font-size: 12px;
-}
-
-/*Live Response - response headers*/
-.swagger-ui .responses-wrapper .responses-inner .responses-table.live-responses-table .response-col_description > div:last-of-type h5 {
-    visibility: hidden;
-    font-size: 0;
-}
-.swagger-ui .responses-wrapper .responses-inner .responses-table.live-responses-table .response-col_description > div:last-of-type h5::after {
-    visibility: visible;
-    content: "Response headers FR"; /*TODO: <---Translation to FR Needed for: "Response headers"*/
-    font-size: 12px;
-}
-
 /*Response - Media type field labels*/
 .swagger-ui .responses-wrapper .responses-inner .response-control-media-type .response-control-media-type__title {
     visibility: hidden;
@@ -237,7 +210,7 @@
 }
 .swagger-ui .responses-wrapper .responses-inner .response-control-media-type .response-control-media-type__title::after {
     visibility: visible;
-    content: "Media type FR"; /*TODO: <---Translation to FR Needed for: "Media type"*/
+    content: "Type de support";
     font-size: 11.2px;
     margin-bottom: 2.24px;
 }
@@ -279,7 +252,7 @@
 }
 .swagger-ui .responses-wrapper .responses-inner .responses-table.live-responses-table .response-col_description > div:first-of-type h5::after {
     visibility: visible;
-    content: "Texte des r\00E9 ponses"; 
+    content: "Texte des r\00E9 ponses";
     font-size: 12px;
 }
 
@@ -314,9 +287,6 @@
     content: "Contr\00F4le de l\02BC en-t\00EAte d\02BC acceptation.";
     font-size: 11.2px;
 }
-
-/*Description label - Description is the same for En & Fr thus translation is redundant.*/
-
 
 /*Links label*/
 .swagger-ui .responses-header td.col.col_header.response-col_links {
@@ -380,17 +350,6 @@
     font-size: 14px;
 }
 
-/*Sample label - Cannot find on page
-.swagger-ui .parameters-container p {
-    visibility: hidden;
-    font-size: 0;
-}
-.swagger-ui .parameters-container p::before {
-    visibility: visible;
-    content: "Aucun param\00E8tre";
-    font-size: 14px;
-}*/
-
 /*Execute button*/
 .swagger-ui .execute-wrapper button.btn.execute.opblock-control__btn {
     text-indent: -100vw !important;
@@ -412,7 +371,7 @@
     font-size: 0;
 }
 .swagger-ui .btn-group button.btn.execute.opblock-control__btn::before {
-    content: "Ex\00E8 cuter";                                          /*<---Translation to FR Needed*/
+    content: "Ex\00E8 cuter";
     text-indent: 0 !important;
     display: block;
     line-height: 1;
@@ -426,7 +385,7 @@
     font-size: 0;
 }
 .swagger-ui .btn-group button.btn.btn-clear.opblock-control__btn::before {
-    content: "Clear";                                                   /*<---Translation to FR Needed*/
+    content: "Effacer les donn\00E9 es";
     text-indent: 0 !important;
     display: block;
     line-height: 1;
@@ -526,5 +485,3 @@
     line-height: 1;
     font-size: 14px;
 }
-
-/*Member */
