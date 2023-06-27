@@ -28,7 +28,7 @@ jobs:
         cp -r schemas _build
         openapi-spec-validator _build/openapi-en.json
         openapi-spec-validator _build/openapi-fr.json
-        cp index.html index-en.html index-fr.html _build
+        cp index.html index-en.html index-fr.html fr.css _build
 
     - name: GitHub Pages action
       # only deploys to gh-pages if ref is main branch
