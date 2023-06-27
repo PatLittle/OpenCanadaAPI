@@ -92,8 +92,12 @@ info:
       fr: https://ouvert.canada.ca/
     email: open-ouvert@tbs-sct.gc.ca
   license:
-    name: Open Government License - Canada
-    url: https://open.canada.ca/en/open-government-licence-canada
+    name: 
+      en: Open Government License - Canada
+      fr: Licence du gouvernement ouvert – Canada
+    url:
+      en: https://open.canada.ca/en/open-government-licence-canada
+      fr: https://ouvert.canada.ca/fr/licence-du-gouvernement-ouvert-canada
   version: '0.1'
 tags:
 - name: action
