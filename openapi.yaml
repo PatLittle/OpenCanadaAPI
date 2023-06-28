@@ -92,8 +92,12 @@ info:
       fr: https://ouvert.canada.ca/
     email: open-ouvert@tbs-sct.gc.ca
   license:
-    name: Open Government License - Canada
-    url: https://open.canada.ca/en/open-government-licence-canada
+    name: 
+      en: Open Government License - Canada
+      fr: Licence du gouvernement ouvert – Canada
+    url:
+      en: https://open.canada.ca/en/open-government-licence-canada
+      fr: https://ouvert.canada.ca/fr/licence-du-gouvernement-ouvert-canada
   version: '0.1'
 tags:
 - name: action
@@ -247,12 +251,20 @@ paths:
                     fr: |
                       Une chaîne de requêtes Solr qui sera utilisée pour filtrer et classer les résultats. 
                   examples:
-                    All data:
-                      value: ''
-                    Analytics:
-                      value: analytics
-                    Mammals:
-                      value: mammal population
+                    en:
+                      All data:
+                        value: ''
+                      Analytics:
+                        value: analytics
+                      Mammals:
+                        value: mammal population
+                    fr:
+                      Toutes les données:
+                        value: ''
+                      Analytique:
+                        value: analytics
+                      Mammifères:
+                        value: mammal population
                 fq:
                   type: string
                   description: 
@@ -266,16 +278,29 @@ paths:
                       Les paramètres disponibles peuvent être découverts en interagissant avec les facettes du site https://rechercher.ouvert.canada.ca/donneesouvertes/ et en observant les paramètres de requête générés. 
 
                   examples:
-                    No filter:
-                      value: ''
-                    Published by the federal Treasury Board Secretariat:
-                      value: 'organization:tbs-sct'
-                    Published by municipalities:
-                      value: 'jurisdiction:municipal'
-                    Transport data:
-                      value: 'subject:transport'
-                    Federal Open Maps data from Environment Canada:
-                      value: 'collection:fgp organization:ec'
+                    en:
+                      No filter:
+                        value: ''
+                      Published by the federal Treasury Board Secretariat:
+                        value: 'organization:tbs-sct'
+                      Published by municipalities:
+                        value: 'jurisdiction:municipal'
+                      Transport data:
+                        value: 'subject:transport'
+                      Federal Open Maps data from Environment Canada:
+                        value: 'collection:fgp organization:ec'
+                    fr:
+                      Aucun filtre:
+                        value: ''
+                      Publié par le Secrétariat du Conseil du Trésor fédéral:
+                        value: 'organization:tbs-sct'
+                      Publié par les municipali:
+                        value: 'jurisdiction:municipal'
+                      Données de transport:
+                        value: 'subject:transport'
+                      Cartes ouvertes fédérales d’Environnement Canada:
+                        value: 'collection:fgp organization:ec'
+
                 sort:
                   type: string
                   description: 
@@ -310,18 +335,32 @@ paths:
                     fr: |
                       Doit être établi à `true` pour récupérer les résultats sur le Registre, aucun effet sur le portail.   
             examples:
-              10 most recently modified datasets:
-                value:
-                  rows: 10
-              3 datasets that best match "water use":
-                value:
-                  q: water use
-                  rows: 3
-              Datasets number 101-120 by last modified date:
-                value:
-                  sort: metadata_modified desc
-                  start: 100
-                  rows: 20
+              en:
+                10 most recently modified datasets:
+                  value:
+                    rows: 10
+                3 datasets that best match "water use":
+                  value:
+                    q: water use
+                    rows: 3
+                Datasets number 101-120 by last modified date:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20   
+              fr:
+                Dix jeux de données modifiés les plus récents:
+                  value:
+                    rows: 10
+                Trois jeux de données qui correspondent le mieux à « utilisation de l’eau »:
+                  value:
+                    q: water use
+                    rows: 3
+                Jeux de données 101-120 classés par date de la dernière modification:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20
       tags:
       - action
       responses:
@@ -515,12 +554,20 @@ paths:
           type: string
           default: manage_group
         examples:
-          Admin:
-            value: admin
-          Editor:
-            value: manage_group
-          Member:
-            value: read
+          en:
+            Admin:
+              value: admin
+            Editor:
+              value: manage_group
+            Member:
+              value: read
+          fr:
+            Administrateur:
+              value: admin
+            Éditeur:
+              value: manage_group
+            Membre:
+              value: read
       tags:
       - action
       responses:
@@ -737,12 +784,20 @@ paths:
                     fr: |
                       L’identifiant ou l’alias de la ressource à rechercher.
                   examples:
-                    Departmental Audit Committees:
-                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
-                    Provinces and Territories:
-                      value: 4cb827a6-a313-4d97-a66b-26fe23984931
-                    Deleted Datasets:
-                      value: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    en:
+                      Departmental Audit Committees:
+                        value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                      Provinces and Territories:
+                        value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                      Deleted Datasets:
+                        value: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    fr:
+                      Comités ministériels d’audit:
+                        value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                      Provinces et territoires:
+                        value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                      Jeux de données supprimés:
+                        value: d22d2aca-155b-4978-b5c1-1d39837e1993
                 filters:
                   type: object
                   description:
@@ -752,8 +807,12 @@ paths:
                       Conditions de correspondance à sélectionner, demandes de publication de données `application/json` uniquement 
 
                   examples:
-                    (Value not supported for GET requests):
-                      value: ''
+                    en:
+                      (Value not supported for GET requests):
+                        value: ''
+                    fr:
+                      (Valeur non supportée pour les requêtes GET):
+                        value: ''
                 q:
                   oneOf:
                   - type: string
@@ -851,24 +910,44 @@ paths:
                   - csv
                   - tsv
             examples:
-              Chairs of Audit Committees in BC in 2019-2020:
-                value:
-                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
-                  q: 2019-2020
-                  filters:
-                    province: BC
-                    role: C-P
-              10 Most Recently Deleted Datasets:
-                value:
-                  resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
-                  sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
-              Provinces and Territories, Abbreviations Only:
-                value:
-                  resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
-                  fields:
-                  - code
-                  - ab_en
-                  - ab_fr
+              en:
+                Chairs of Audit Committees in BC in 2019-2020:
+                  value:
+                    resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    q: 2019-2020
+                    filters:
+                      province: BC
+                      role: C-P
+                10 Most Recently Deleted Datasets:
+                  value:
+                    resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
+                Provinces and Territories, Abbreviations Only:
+                  value:
+                    resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                    fields:
+                    - code
+                    - ab_en
+                    - ab_fr
+              fr:
+                Présidents des comités d’audit en Colombie-Britannique en 2019-2020:
+                  value:
+                    resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    q: 2019-2020
+                    filters:
+                      province: BC
+                      role: C-P
+                Les 10 jeux de données les plus récemment supprimés:
+                  value:
+                    resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
+                Provinces et territoires, abréviations seulement:
+                  value:
+                    resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                    fields:
+                    - code
+                    - ab_en
+                    - ab_fr
       tags:
       - action
       responses:
@@ -915,29 +994,54 @@ paths:
                     fr: |
                       Conditions de correspondance à sélectionner, demandes POST `application/json` uniquement. 
             examples:
-              Deleted ATI Summaries from December 2016:
-                value:
-                  resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
-                  filters:
-                    year: 2016
-                    month: 12
-              Delete Travel Expenses by Reference Number:
-                value:
-                  resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
-                  filters:
-                    reference_number: 2023-Q1-0010
-              Delete Grants and Contributions by Recipient Counrty:
-                value:
-                  resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
-                  filters:
-                    recipient_country:
-                      - US
-                      - AU
-                      - BE
-              Delete All Hospitality Expenses:
-                value:
-                  resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
-                  filters: {}
+              en:
+                Deleted ATI Summaries from December 2016:
+                  value:
+                    resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
+                    filters:
+                      year: 2016
+                      month: 12
+                Delete Travel Expenses by Reference Number:
+                  value:
+                    resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
+                    filters:
+                      reference_number: 2023-Q1-0010
+                Delete Grants and Contributions by Recipient Counrty:
+                  value:
+                    resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
+                    filters:
+                      recipient_country:
+                        - US
+                        - AU
+                        - BE
+                Delete All Hospitality Expenses:
+                  value:
+                    resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
+                    filters: {}
+              fr:
+                Sommaires de l’AI supprimés en décembre 2016:
+                  value:
+                    resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
+                    filters:
+                      year: 2016
+                      month: 12
+                Supprimer les frais de voyage par numéro de référence:
+                  value:
+                    resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
+                    filters:
+                      reference_number: 2023-Q1-0010
+                Supprimer les subventions et les contributions par pays bénéficiaire:
+                  value:
+                    resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
+                    filters:
+                      recipient_country:
+                        - US
+                        - AU
+                        - BE
+                Supprimer toutes les dépenses d’accueil:
+                  value:
+                    resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
+                    filters: {}
       tags:
       - action
       responses:
