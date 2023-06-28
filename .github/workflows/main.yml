@@ -29,7 +29,7 @@ jobs:
         cp schemas/dataset-fr.json schemas/resource-multipart-fr.json _build/fr/schemas
         openapi-spec-validator _build/en/openapi-en.json
         openapi-spec-validator _build/fr/openapi-fr.json
-        cp index.html _build && cp index-en.html _build/en && cp index-fr.html _build/fr && cp fr.css _build/fr
+        cp index.html _build/index.html && cp index-en.html _build/en/index.html && cp index-fr.html _build/fr/index.html && cp fr.css _build/fr/fr.css
 
     - name: Download and unpack the theme
       run: |
