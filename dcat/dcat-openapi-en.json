@@ -1,0 +1,178 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "CKAN DCAT Extension API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://open.canada.ca/data",
+        "description": "CKAN DCAT Extension API Server"
+      }
+    ],
+    "paths": {
+      "/catalog.{format}": {
+        "get": {
+          "summary": "Get Catalog in Specified Format with Optional Filtering",
+          "description": "Retrieves the catalog of datasets in various formats, allowing optional filtering and profile specifications. The response format is determined by the 'format' parameter and can be further customized with 'profiles', 'q', and 'fq' query parameters.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "format",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "xml",
+                  "ttl",
+                  "jsonld",
+                  "n3",
+                  "rdf"
+                ]
+              },
+              "description": "The format of the response (xml, ttl, jsonld, n3, rdf).",
+              "example": "xml"
+            },
+            {
+              "in": "query",
+              "name": "profiles",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Comma-separated list of profiles to apply, such as 'euro_dcat_ap', 'schemaorg'.",
+              "example": "euro_dcat_ap,schemaorg"
+            },
+            {
+              "in": "query",
+              "name": "q",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Free text query parameter for searching within the catalog.",
+              "example": "budget"
+            },
+            {
+              "in": "query",
+              "name": "fq",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Filter query for advanced filtering, such as filtering by tags.",
+              "example": "tags:economy"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with catalog data in the specified format, optionally filtered.",
+              "content": {
+                "application/xml": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/turtle": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/ld+json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/n3": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/rdf+xml": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/dataset/{dataset-id}.{format}": {
+        "get": {
+          "summary": "Get Specific Dataset in Specified Format",
+          "description": "Retrieves details of a specific dataset identified by 'dataset-id' in the format specified by 'format'. The response format can be one of several options such as XML, TTL, JSONLD, N3, or RDF, and can be further tailored by the 'profiles' query parameter.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "dataset-id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The unique identifier of the dataset.",
+              "example": "verbreitung-der-steinbockkolonien"
+            },
+            {
+              "in": "path",
+              "name": "format",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "xml",
+                  "ttl",
+                  "jsonld",
+                  "n3",
+                  "rdf"
+                ]
+              },
+              "description": "The format of the response (xml, ttl, jsonld, n3, rdf).",
+              "example": "xml"
+            },
+            {
+              "in": "query",
+              "name": "profiles",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Profile to apply for the response formatting. Examples include 'euro_dcat_ap', 'schemaorg', etc.",
+              "example": "euro_dcat_ap"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with dataset details in the specified format and profile.",
+              "content": {
+                "application/xml": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/turtle": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/ld+json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/n3": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/rdf+xml": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Dataset not found."
+            }
+          }
+        }
+      }
+    }
+  }
