@@ -1,0 +1,48 @@
+name: Compile, Test, & Deploy
+on: [push, pull_request]
+
+# This job installs dependencies, build the book, and pushes it to `gh-pages`
+jobs:
+  deploy-book:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: split the yaml
+      run: |
+        mkdir _build _build/en _build/en/schemas _build/fr _build/fr/schemas _build/theme
+        python splityaml.py openapi.yaml en _build/en/openapi-en.json
+        python splityaml.py openapi.yaml fr _build/fr/openapi-fr.json
+
+    - name: Test that our specs are valid
+      run: |
+        cp schemas/dataset-en.json schemas/resource-multipart-en.json _build/en/schemas
+        cp schemas/dataset-fr.json schemas/resource-multipart-fr.json _build/fr/schemas
+        openapi-spec-validator _build/en/openapi-en.json
+        openapi-spec-validator _build/fr/openapi-fr.json
+        cp index.html _build/index.html && cp index-en.html _build/en/index.html && cp index-fr.html _build/fr/index.html && cp fr.css _build/fr/fr.css
+
+    - name: Download and unpack the theme
+      run: |
+        curl -L "https://github.com/wet-boew/themes-cdn/archive/v11.0.0-gcweb.tar.gz" | tar -zvx --strip-components 1 --directory=_build/theme
+        echo "Removing unused theme files..."
+        find _build/theme -type f \! \( -name "favicon.ico" -o -name "theme.min.css" -o -name "messages.min.css" -o -name "sp-bg-2.jpg" -o -name "sig-spl.svg" -o -name "wmms-spl.svg" \) -delete -print
+        echo "Removing empty theme directories..."
+        find _build/theme -empty -type d -delete -print
+
+    - name: GitHub Pages action
+      # only deploys to gh-pages if ref is main branch
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_build

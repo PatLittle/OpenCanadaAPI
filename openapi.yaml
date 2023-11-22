@@ -1,0 +1,1401 @@
+---
+openapi: 3.0.0
+servers:
+- url: https://open.canada.ca/data/api
+  description: 
+    en: |
+      Production Portal [PUBLIC]
+    fr: |
+      Portail de production [PUBLIC] 
+- url: https://registry.open.canada.ca/api
+  description: 
+    en: |
+      Production Registry [RESTRICTED ACCESS]
+    fr: |
+      Registre de production [ACCÈS RESTREINT] 
+- url: https://staging.open.canada.ca/data/api
+  description: 
+    en: |
+      Staging Portal [RESTRICTED ACCESS]
+    fr: |
+      Portail de préparation [ACCÈS RESTREINT] 
+- url: https://registry-staging.open.canada.ca/api
+  description: 
+    en: |
+      Staging Registry [RESTRICTED ACCESS]
+    fr: |
+      Registre de préparation [ACCÈS RESTREINT] 
+- url: https://test.open.canada.ca/data/api
+  description: 
+    en: |
+      Test Portal [RESTRICTED ACCESS]
+    fr: |
+      Portail d’essai [ACCÈS RESTREINT] 
+- url: https://registry-test.open.canada.ca/api
+  description: 
+    en: |
+      Test Registry [RESTRICTED ACCESS]
+    fr: |
+      Registre d’essai [ACCÈS RESTREINT] 
+
+info:
+  title: 
+    en: |
+      Open Government CKAN API
+    fr: |
+      API CKAN du gouvernement ouvert 
+  description: 
+    en: |
+      This API provides live access to the CKAN portion of the Open Government Portal and Registry systems.
+
+      - Portal: https://open.canada.ca
+        - our public data portal
+        - includes data federated from provinces and municipalities
+        - read-only API calls can be made without an API key
+        - authorization required only for publishing federated data
+
+      - Registry: https://registry.open.canada.ca
+        - accessible within the Government of Canada (GoC) network
+        - for collecting and publishing data from GoC departments
+        - new datasets must be manually reviewed and approved by the Open Government team
+        - publishes approved datasets to the Production Portal automatically
+        - user account or API key required for all operations
+
+      Our Staging sites are for sharing upcoming features and testing integration, and Test sites
+      are for features in development.
+    fr: |
+      Cette interface de programmation d’applications (API) permet d’accéder en direct à la partie CKAN du portail et des systèmes de registre du gouvernement ouvert. 
+ 
+      - Portail : https://open.canada.ca/fr 
+        - Notre portail de données publiques. 
+        - Il inclut des données fédérées par les provinces et les municipalités. 
+        - Des appels API en lecture seule peuvent être effectués sans clé API. 
+        - Une autorisation est requise uniquement pour la publication de données fédérées. 
+      
+      - Registre : https://registry.open.canada.ca/fr 
+        - Il est accessible dans le réseau du gouvernement du Canada (GC). 
+        - Il permet la collecte et la publication de données provenant des ministères du GC.
+        - Les nouveaux jeux de données doivent être examinés et approuvés manuellement par l’équipe du gouvernement ouvert. 
+        - Il permet la publication automatique des jeux de données approuvés sur le portail de production. 
+        - Un compte d’utilisateur ou une clé API est nécessaire pour toutes les opérations. 
+      
+      Nos sites de préparation servent à partager les fonctionnalités à venir et à tester l’intégration, et nos sites d’essai sont destinés aux fonctionnalités en cours d’élaboration. 
+
+
+  termsOfService: https://open.canada.ca/en/open-government-licence-canada
+  contact:
+    name:
+      en: TBS Open Government
+      fr: Gouvernement ouvert SCT
+    url:
+      en: https://open.canada.ca/
+      fr: https://ouvert.canada.ca/
+    email: open-ouvert@tbs-sct.gc.ca
+  license:
+    name: 
+      en: Open Government License - Canada
+      fr: Licence du gouvernement ouvert – Canada
+    url:
+      en: https://open.canada.ca/en/open-government-licence-canada
+      fr: https://ouvert.canada.ca/fr/licence-du-gouvernement-ouvert-canada
+  version: '0.1'
+tags:
+- name: action
+  description: 
+    en: |
+      ### CKAN's Action API is a powerful, RPC-style API that exposes all of CKAN's core features
+
+      All endpoints support POST requests with an `application/json` or a
+        `multipart/form-data` body.
+      -   Use an `application/json` POST request when nested json parameters
+        are required
+      -   Use a `multipart/form-data` POST request when file uploads are required
+
+      Read-only endpoints (`*_show`, `*_list`, `*_search` etc.)
+      accept GET requests with query parameters.
+      
+      Responses are returned in a JSON envelope on success:
+      ```json
+      {
+        "help": "url to complete endpoint help",
+        "success": true,
+        "result": {...}
+      }
+      ```
+      or on errors:
+      ```json
+      {
+        "help": "url to complete endpoint help",
+        "success": false,
+        "error": {
+          "__type": "error type",
+          "message": "error message",
+          "field-with-error": ["first-error", "second-error"],
+          ...
+        }
+      }
+      ```
+    fr: |
+      ### L’API d’action de CKAN est une puissante API de type appel de procédure à distance qui expose toutes les fonctionnalités de base de CKAN. 
+ 
+      Tous les points terminaux prennent en charge les demandes POST avec un corps `application/json` ou un corps 
+         `multipart/form-data`. 
+      -   Utiliser une demande POST `application/json` lorsque des paramètres json imbriqués sont nécessaires. 
+      -   Utiliser une demande POST `multipart/form-data` lorsque des téléchargements de fichiers sont nécessaires. 
+ 
+      Points terminaux en lecture seule (`*_show`, `*_list`, `*_search` etc.) 
+      Accepter les demandes d’obtention de données (GET) avec des paramètres de requête. 
+ 
+      Les réponses sont renvoyées dans une enveloppe JSON en cas de succès : 
+      ```json
+      { 
+        "help": "url pour compléter l’aide sur les points terminaux", 
+        "success": true, 
+        "result": {…} 
+      } 
+      ```
+      Ou sur les erreurs : 
+      ```json
+      { 
+        "help": "url pour compléter l’aide sur les points terminaux",
+        "success": false, 
+        "error": { 
+          "__type": "type d’erreur", 
+          "message": "message d’erreur", 
+          "champ-avec-erreur": ["première-erreur", "seconde-erreur"], 
+          … 
+        } 
+      } 
+      ```
+
+
+
+  externalDocs:
+    description:
+      en: |
+        Full docs
+      fr: |
+        Docs complets 
+    url: https://docs.ckan.org/en/2.8/api/
+security:
+- {}
+- internal_api_key: []
+paths:
+  "/action/status_show":
+    get:
+      summary: 
+        en: |
+          Get the CKAN version and a list of installed extensions
+        fr: |
+          Obtenir la version de CKAN et la liste des extensions installées. 
+      description: 
+        en: |
+          Use this API to check that you can reach the server and to check its capabilities.
+        fr: |
+          Utilisez cette API pour vous assurer que vous pouvez atteindre le serveur et pour vérifier ses capacités. 
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              Returns the CKAN version and a list of installed extensions
+            fr: |
+              Renvoie la version de CKAN et la liste des extensions installées. 
+  "/action/package_list":
+    get:
+      summary: 
+        en: |
+          Get a list of all package ids (datasets)
+        fr: |
+          Obtenir une liste de tous les identifiants des paquetages (jeux de données). 
+      description:
+        en: |
+          Note: our site uses the same value for the "name" and "id" fields of datasets
+        fr: |
+          Remarque : notre site utilise la même valeur pour les champs « name » (nom) et « id » (identifiant) des jeux de données 
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              Returns a list of package ids
+            fr: |
+              Renvoie une liste d’identifiants de paquetages.
+  "/action/package_search":
+    post/get:
+      summary: 
+        en: |
+          Find packages (datasets) matching query terms
+        fr: |
+          Trouver des paquetages (jeux de données) correspondant aux termes de la requête. 
+      description: 
+        en: |
+          Searches for packages (datasets) matching the specified query terms
+        fr: |
+          Recherche des paquetages (jeux de données) correspondant aux termes d’interrogation spécifiés 
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                q:
+                  type: string
+                  description: 
+                    en: |
+                      A solr query string that will be used to filter and score results
+                    fr: |
+                      Une chaîne de requêtes Solr qui sera utilisée pour filtrer et classer les résultats. 
+                  examples:
+                    en:
+                      All data:
+                        value: ''
+                      Analytics:
+                        value: analytics
+                      Mammals:
+                        value: mammal population
+                    fr:
+                      Toutes les données:
+                        value: ''
+                      Analytique:
+                        value: analytics
+                      Mammifères:
+                        value: mammal population
+                fq:
+                  type: string
+                  description: 
+                    en: |
+                      A solr filter query that will facet results by removing non-matching items.
+                      The available parameters may be discovered by interacting with the
+                      facets on https://open.canada.ca/data/dataset and observing the
+                      query parameters generated.
+                    fr: |
+                      Une requête de filtrage Solr qui permet d’affiner les résultats en supprimant les éléments sans correspondance.
+                      Les paramètres disponibles peuvent être découverts en interagissant avec les facettes du site https://rechercher.ouvert.canada.ca/donneesouvertes/ et en observant les paramètres de requête générés. 
+
+                  examples:
+                    en:
+                      No filter:
+                        value: ''
+                      Published by the federal Treasury Board Secretariat:
+                        value: 'organization:tbs-sct'
+                      Published by municipalities:
+                        value: 'jurisdiction:municipal'
+                      Transport data:
+                        value: 'subject:transport'
+                      Federal Open Maps data from Environment Canada:
+                        value: 'collection:fgp organization:ec'
+                    fr:
+                      Aucun filtre:
+                        value: ''
+                      Publié par le Secrétariat du Conseil du Trésor fédéral:
+                        value: 'organization:tbs-sct'
+                      Publié par les municipali:
+                        value: 'jurisdiction:municipal'
+                      Données de transport:
+                        value: 'subject:transport'
+                      Cartes ouvertes fédérales d’Environnement Canada:
+                        value: 'collection:fgp organization:ec'
+
+                sort:
+                  type: string
+                  description: 
+                    en: |
+                      Sort order for the search results, defaults to `score desc, metadata_modified desc`
+                      meaning sort by query score order, and with no query sort by most recently modified.
+                    fr: |
+                      Ordre de tri des résultats de la recherche, la valeur par défaut `score desc, metadata_modified desc` 
+                      ce qui signifie que les résultats sont triés en fonction de la note attribuée à la requête et, en l’absence de requête, en fonction de la modification la plus récente. 
+
+                rows:
+                  type: integer
+                  description: 
+                    en: |
+                      Maximum rows to return, clamped to 1000
+                    fr: |
+                      Nombre maximal de lignes à renvoyer, limité à 1 000.
+                  default: 20
+                start:
+                  type: integer
+                  description: 
+                    en: |
+                      The offset from the beginning of results (0) for pagination
+                    fr: |
+                      Le décalage par rapport au début des résultats (0) pour la pagination. 
+                include_private:
+                  type: boolean
+                  description:
+                    en: |
+                      Must be set to `true` to retrieve results on the Registry,
+                      no effect on the Portal
+                    fr: |
+                      Doit être établi à `true` pour récupérer les résultats sur le Registre, aucun effet sur le portail.   
+            examples:
+              en:
+                10 most recently modified datasets:
+                  value:
+                    rows: 10
+                3 datasets that best match "water use":
+                  value:
+                    q: water use
+                    rows: 3
+                Datasets number 101-120 by last modified date:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20   
+              fr:
+                Dix jeux de données modifiés les plus récents:
+                  value:
+                    rows: 10
+                Trois jeux de données qui correspondent le mieux à « utilisation de l’eau »:
+                  value:
+                    q: water use
+                    rows: 3
+                Jeux de données 101-120 classés par date de la dernière modification:
+                  value:
+                    sort: metadata_modified desc
+                    start: 100
+                    rows: 20
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of packages (datasets) including all metadata available.
+            fr: |
+              Liste des paquetages (jeux de données) comprenant toutes les métadonnées disponibles. 
+  "/action/package_show":
+    get:
+      summary: 
+        en: |
+          Get metadata about one specific package (dataset)
+        fr: |
+          Obtenir les métadonnées afférentes à un paquetage particulier (jeu de données). 
+      description: 
+        en: |
+          Returns metadata about the package (dataset) corresponding to its UUID.
+          Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+          for information about the metadata fields returned.
+        fr: |
+          Renvoie les métadonnées du paquetage (jeu de données) correspondant à son IDUU (identifiant unique universel).
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+          pour obtenir des renseignements sur les champs de métadonnées renvoyés. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: |
+            The package UUID
+          fr: |
+            Le IDUU de paquetage.
+        schema:
+          type: string
+          format: uuid
+          default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              A package metadata object
+            fr: |
+              Un objet de métadonnées de paquetage.
+          content:
+            application/json:
+              schema:
+                en:
+                  $ref: 'schemas/dataset-en.json'
+                fr:
+                  $ref: 'schemas/dataset-fr.json'
+  "/action/package_activity_list":
+    get:
+      summary: 
+        en: |
+          Get the activity stream of a package (dataset)
+        fr: |
+          Obtenir le flux des activités d’un paquetage (jeu de données). 
+      description: 
+        en: |
+          Returns a package's activity stream, newest activities first
+        fr: |
+          Renvoie le flux d’activités d’un paquetage, en commençant par les activités les plus récentes. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: |
+            The package UUID
+          fr: |
+            Le IDUU de paquetage.
+        schema:
+          type: string
+          default: 2916fad5-ebcc-4c86-b0f3-4f619b29f412
+      - name: offset
+        in: query
+        description: 
+          en: |
+            The offset of the first activity to return, used for pagination
+          fr: |
+            Le décalage de la première activité à renvoyer, utilisé pour la pagination. 
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: 
+          en: |
+            The maximum number of activities to return
+          fr: |
+            Le nombre maximum d’activités à renvoyer. 
+        schema:
+          type: integer
+          default: 31
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of activities
+            fr: |
+              Liste des activités. 
+  "/action/organization_activity_list":
+    get:
+      summary: 
+        en: |
+          Get the activity stream of an organization
+        fr: |
+          Obtenir le flux des activités d’une organisation. 
+      description: 
+        en: |
+          Return an organization's activity stream, newest activites first
+        fr: |
+          Renvoyer le flux d’activités d’une organisation, en commençant par les activités les plus récentes. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: |
+            The id or name (short form) of the organization
+          fr: |
+            L’identifiant ou le nom (forme courte) de l’organisation. 
+
+        schema:
+          type: string
+          default: ec
+      - name: offset
+        in: query
+        description: 
+          en: |
+            The offset of the first activity to return, used for pagination
+          fr: |
+            Le décalage de la première activité à renvoyer, utilisé pour la pagination. 
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: 
+          en: |
+            The maximum number of activities to return
+          fr: |
+            Le nombre maximum d’activités à renvoyer. 
+        schema:
+          type: integer
+          default: 31
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of an organization's activities
+            fr: |
+              Liste des activités d’une organisation.
+  "/action/organization_list_for_user":
+    get:
+      summary: 
+        en: |
+          Get organizations that a user has a given permission for
+        fr: |
+          Obtenir la liste des organisations pour lesquelles un utilisateur dispose d’une autorisation donnée. 
+      description: 
+        en: |
+          Return the organizations that the user has a given permission for
+        fr: |
+          Renvoyer les organisations pour lesquelles l’utilisateur a reçu une autorisation. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: |
+            The name or id of the user, defaults to the user making the request
+          fr: |
+            Le nom ou l’identifiant de l’utilisateur, par défaut l’utilisateur qui fait la demande. 
+        schema:
+          type: string
+      - name: permission
+        in: query
+        description: 
+          en: |
+            The permission the user has against the returned organization
+          fr: |
+            L’autorisation dont dispose l’utilisateur concernant l’organisation renvoyée. 
+        schema:
+          type: string
+          default: manage_group
+        examples:
+          en:
+            Admin:
+              value: admin
+            Editor:
+              value: manage_group
+            Member:
+              value: read
+          fr:
+            Administrateur:
+              value: admin
+            Éditeur:
+              value: manage_group
+            Membre:
+              value: read
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of organizations for given permission
+            fr: |
+              Liste des organisations pour une autorisation donnée. 
+  "/action/organization_show":
+    get:
+      summary: 
+        en: |
+          Get details of a specific organization
+        fr: |
+          Obtenir des détails sur une organisation particulière
+      description: 
+        en: |
+          Return the details of an organization
+        fr: |
+          Renvoyer les détails d’une organisation. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: |
+            The id or name (short form) of the organization
+          fr: |
+            L’identifiant ou le nom (forme courte) de l’organisation. 
+        schema:
+          type: string
+          default: tbs-sct
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List organization details
+            fr: |
+              Liste des détails de l’organisation. 
+  "/action/organization_list":
+    get:
+      summary: 
+        en: |
+          Get names of all organizations
+        fr: |
+          Obtenir les noms de toutes les organisations. 
+      description: 
+        en: |
+          Returns the names (short forms) of all indexed organizations
+        fr: |
+          Renvoie les noms (formes courtes) de toutes les organisations indexées. 
+      parameters: []
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of organizations
+            fr: |
+              Liste des organisations. 
+  "/action/resource_search":
+    get:
+      summary: 
+        en: |
+          Find resources
+        fr: |
+          Trouver des ressources. 
+      description: 
+        en: |
+          Search resources based on their field values. Note that
+          [package_search](#/action/get_action_package_search) has better performance
+          and more search functionality than this endpoint.
+        fr: |
+          Recherche de ressources en fonction des valeurs de leurs champs. Noter que 
+          [package_search] (#/action/get_action_package_search) a de meilleures performances 
+          et plus de fonctionnalités de recherche que ce point terminal. 
+      parameters:
+      - name: query
+        in: query
+        description: 
+          en: |
+            The search criteria string or list of strings of the form ``{field}:{term1}``
+          fr: |
+            La chaîne de critères de recherche ou une liste de chaînes du format ``{champ}:{term1}``.
+        schema:
+          type: string
+          default: format:csv
+      - name: order_by
+        in: query
+        description: 
+          en: |
+            A field on the resource model that orders the results
+          fr: |
+            Un champ sur le modèle de ressource qui classe les résultats.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: 
+          en: |
+            Apply an offset to the query
+          fr: |
+            Appliquer un décalage à la requête.
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: 
+          en: |
+            Apply a limit to the query
+          fr: |
+            Appliquer une limite à la requête.
+        schema:
+          type: integer
+          default: 0
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of resources
+            fr: |
+              Liste des ressources
+  "/action/resource_show":
+    get:
+      summary: 
+        en: |
+          Get metadata for a specific resource
+        fr: |
+          Obtenir des métadonnées pour une ressource particulière. 
+      description: 
+        en: |
+          Returns the metadata of a resource. Refer to the
+          [resource_fields value in the dataset schema](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          for information about the metadata fields.
+        fr: |
+          Renvoie les métadonnées d’une ressource. Se référer à la valeur des 
+          [champs de la ressource] dans le schéma du jeu de données (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          pour obtenir des renseignements sur les champs de métadonnées. 
+      parameters:
+      - name: id
+        in: query
+        description: 
+          en: | 
+            The id of the resource
+          fr: |
+            L’identifiant de la ressource. 
+        schema:
+          type: string
+          default: e6c8bb1d-3726-418b-9b7e-1d97a9bbb817
+      - name: include_tracking
+        in: query
+        description: 
+          en: |
+            Return tracking (usage) information
+          fr: |
+            Informations sur le suivi des renvois (utilisation). 
+        schema:
+          type: boolean
+          default: false
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              Return metadata of a resource
+            fr: |
+              Renvoyer les métadonnées d’une ressource. 
+          content:
+            application/json:
+              schema:
+                en:
+                  $ref: 'schemas/dataset-en.json#/properties/resources/items'
+                fr:
+                  $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+  "/action/datastore_search":
+    post/get:
+      summary: 
+        en: |
+          Search a datastore resource
+        fr: |
+          Rechercher une ressource de la banque de données. 
+      description: 
+        en: |
+          The datastore_search action allows you to search data in a resource.
+
+          Well-formatted CSV files that are uploaded (not linked) are automatically
+          loaded into the datastore.
+        fr: |
+          L’action de recherche dans la banque de données vous permet de rechercher des données dans une ressource. 
+ 
+          Les fichiers CSV bien formatés qui sont téléchargés (et non liés) sont automatiquement
+          chargés dans la banque de données. 
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_id:
+                  type: string
+                  format: uuid
+                  description: 
+                    en: |
+                      id or alias of the resource to be searched against
+                    fr: |
+                      L’identifiant ou l’alias de la ressource à rechercher.
+                  examples:
+                    en:
+                      Departmental Audit Committees:
+                        value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                      Provinces and Territories:
+                        value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                      Deleted Datasets:
+                        value: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    fr:
+                      Comités ministériels d’audit:
+                        value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                      Provinces et territoires:
+                        value: 4cb827a6-a313-4d97-a66b-26fe23984931
+                      Jeux de données supprimés:
+                        value: d22d2aca-155b-4978-b5c1-1d39837e1993
+                filters:
+                  type: object
+                  description:
+                    en: |
+                      matching conditions to select, `application/json` POST requests only
+                    fr: |
+                      Conditions de correspondance à sélectionner, demandes de publication de données `application/json` uniquement 
+
+                  examples:
+                    en:
+                      (Value not supported for GET requests):
+                        value: ''
+                    fr:
+                      (Valeur non supportée pour les requêtes GET):
+                        value: ''
+                q:
+                  oneOf:
+                  - type: string
+                    description: 
+                      en: |
+                        full text query searching across all columns in each row
+                      fr: |
+                        Recherche en texte intégral sur toutes les colonnes de chaque ligne. 
+                  - type: object
+                    description: 
+                      en: |
+                        fill text search on each field given
+                      fr: |
+                        Remplir une recherche de texte sur chaque champ donné. 
+                distinct:
+                  type: boolean
+                  description: 
+                    en: |
+                      return only distinct rows
+                    fr: |
+                      Renvoyer uniquement les lignes distinctes. 
+                  default: false
+                plain:
+                  type: boolean
+                  description: 
+                    en: |
+                      treat as plain text query
+                    fr: |
+                      Traiter comme une requête en texte clair.
+                  default: true
+                language:
+                  type: string
+                  description: 
+                    en: |
+                      language of the full text query
+                    fr: |
+                      Langue de la requête en texte intégral. 
+                  default: english
+                limit:
+                  type: integer
+                  description: 
+                    en: |
+                      maximum number of rows to return
+                    fr: |
+                      Nombre maximal de lignes à renvoyer. 
+                  default: 100
+                offset:
+                  type: integer
+                  description: 
+                    en: |
+                      offset this number of rows
+                    fr: |
+                      Décaler ce nombre de lignes. 
+                fields:
+                  oneOf:
+                  - type: string
+                    description: 
+                      en: |
+                        comma-separated string of column names to return
+                      fr: |
+                        Chaîne de noms de colonnes séparée par des virgules à renvoyer. 
+                  - type: array
+                    description: 
+                      en: |
+                        list of column names to return
+                      fr: |
+                        Liste des noms de colonnes à renvoyer. 
+                sort:
+                  type: string
+                  description: 
+                    en: |
+                      comma-separated string of column names with sort order
+                    fr: |
+                      Chaîne de noms de colonnes séparée par des virgules avec ordre de tri. 
+                  example: reporting_period desc, line_number
+                include_total:
+                  type: boolean
+                  description: 
+                    en: |
+                      calculate and return the total number of matching rows, set to `false` for improved performance
+                    fr: | 
+                      Calculer et renvoyer le nombre total de lignes correspondantes, établi à `false` pour améliorer les performances. 
+                  default: true
+                records_format:
+                  type: string
+                  description: 
+                    en: |
+                      the format for the records return value, set to `csv` or `tsv` for improved performance
+                    fr: |
+                      Le format de la valeur de retour des dossiers, établi à `csv` ou `tsv` pour de meilleures performances. 
+                  default: objects
+                  enum:
+                  - objects
+                  - lists
+                  - csv
+                  - tsv
+            examples:
+              en:
+                Chairs of Audit Committees in BC in 2019-2020:
+                  value:
+                    resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    q: 2019-2020
+                    filters:
+                      province: BC
+                      role: C-P
+                10 Most Recently Deleted Datasets:
+                  value:
+                    resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
+                Provinces and Territories, Abbreviations Only:
+                  value:
+                    resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                    fields:
+                    - code
+                    - ab_en
+                    - ab_fr
+              fr:
+                Présidents des comités d’audit en Colombie-Britannique en 2019-2020:
+                  value:
+                    resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                    q: 2019-2020
+                    filters:
+                      province: BC
+                      role: C-P
+                Les 10 jeux de données les plus récemment supprimés:
+                  value:
+                    resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                    sort: '"Date and Time Deleted/ Date et heure de suppression" desc'
+                Provinces et territoires, abréviations seulement:
+                  value:
+                    resource_id: 4cb827a6-a313-4d97-a66b-26fe23984931
+                    fields:
+                    - code
+                    - ab_en
+                    - ab_fr
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              List of packages (datasets) including all metadata available.
+            fr: |
+              Liste des paquetages (jeux de données) comprenant toutes les métadonnées disponibles. 
+  "/action/datastore_records_delete":
+    post:
+      summary: 
+        en: |
+          Deletes records from a DataStore table
+        fr: |
+          Supprime les enregistrements d’un tableau de banque de données. 
+      description: 
+        en: |
+          The datastore_records_delete action allows you to delete a set of data in a resource.
+          It will never remove the table itself.
+        fr: |
+          L’action datastore_records_delete permet de supprimer un jeu de données dans une ressource. 
+          Cela ne supprimera jamais le tableau lui-même.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_id:
+                  type: string
+                  format: uuid
+                  description: 
+                    en: |
+                      id or alias of the resource to be searched against
+                    fr: |
+                      L’identifiant ou le pseudonyme de la ressource à rechercher 
+                filters:
+                  type: object
+                  description: 
+                    en: |
+                      matching conditions to select, `application/json` POST requests only
+                    fr: |
+                      Conditions de correspondance à sélectionner, demandes POST `application/json` uniquement. 
+            examples:
+              en:
+                Deleted ATI Summaries from December 2016:
+                  value:
+                    resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
+                    filters:
+                      year: 2016
+                      month: 12
+                Delete Travel Expenses by Reference Number:
+                  value:
+                    resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
+                    filters:
+                      reference_number: 2023-Q1-0010
+                Delete Grants and Contributions by Recipient Counrty:
+                  value:
+                    resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
+                    filters:
+                      recipient_country:
+                        - US
+                        - AU
+                        - BE
+                Delete All Hospitality Expenses:
+                  value:
+                    resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
+                    filters: {}
+              fr:
+                Sommaires de l’AI supprimés en décembre 2016:
+                  value:
+                    resource_id: 69c59cec-8d61-42cb-903e-8fe68fa7ad99
+                    filters:
+                      year: 2016
+                      month: 12
+                Supprimer les frais de voyage par numéro de référence:
+                  value:
+                    resource_id: 33b47e58-f1ec-4e0b-92b2-c0c2686c25d2
+                    filters:
+                      reference_number: 2023-Q1-0010
+                Supprimer les subventions et les contributions par pays bénéficiaire:
+                  value:
+                    resource_id: b076ced6-ef48-45b8-8db2-dd7d27c11fe2
+                    filters:
+                      recipient_country:
+                        - US
+                        - AU
+                        - BE
+                Supprimer toutes les dépenses d’accueil:
+                  value:
+                    resource_id: 82883806-09d1-4937-b5bd-2c413ac5afd3
+                    filters: {}
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: | 
+              Dict of original filters.
+            fr: |
+              Dictionnaire des filtres originaux 
+  "/action/scheming_dataset_schema_show":
+    get:
+      summary: 
+        en: |
+          Return the schema for a dataset type
+        fr: |
+          Renvoyer le schéma d’un type de jeu de données. 
+      description: 
+        en: |
+          Dataset metadata schemas are defined in the [ckanext-scheming](https://github.com/ckan/ckanext-scheming)
+          format.
+        fr: |
+          Les schémas de métadonnées des jeux de données sont définis dans le format [ckanext-scheming] (https://github.com/ckan/ckanext-scheming). 
+      parameters:
+      - name: type
+        in: query
+        description: 
+          en: |
+            The dataset type
+          fr: |
+            Le type de jeu de données. 
+        schema:
+          type: string
+          default: dataset
+          enum:
+          - dataset
+          - info
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              Returns metadata schema
+            fr: |
+              Renvoie le schéma des métadonnées. 
+  "/action/package_create":
+    post:
+      summary: 
+        en: |
+          Create a new dataset (package)
+        fr: |
+          Créer un nouveau jeu de données (paquetage). 
+      description: 
+        en: |
+          The exact fields available will depend on the `type` parameter.
+
+          Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+          for information about all the metadata fields available.
+        fr: |
+          Tous les champs non transmis conserveront leurs valeurs initiales. 
+ 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
+ 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
+          pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the dataset metadata created
+            fr: |
+              Une copie des métadonnées du jeu de données créées.  
+  "/action/package_update":
+    post:
+      summary: 
+        en: |
+          Update an existing dataset (package)
+        fr: |
+          Mettre à jour un jeu de données existant (paquetage).
+      description: 
+        en: |
+          The exact fields available will depend on the `type` parameter.
+
+          Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+          for information about all the metadata fields available.
+        fr: |
+          Tous les champs non transmis conserveront leurs valeurs initiales. 
+ 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
+ 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
+          pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the dataset metadata updated
+            fr: |
+              Une copie des métadonnées du jeu de données mises à jour. 
+  "/action/package_patch":
+    post:
+      summary: 
+        en: |
+          Update only specific fields of an existing dataset (package)
+        fr: |
+          Mettre à jour uniquement des champs précis d’un jeu de données existant (paquetage). 
+      description:
+        en: |
+          Any fields not passed will retain their original values.
+
+          The exact fields available will depend on the `type` parameter.
+
+          Refer to the [open data schema (type=dataset)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset)
+          or the [open information schema (type=info)](https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info)
+          for information about all the metadata fields available.
+        fr: |
+          Tous les champs non transmis conserveront leurs valeurs initiales. 
+ 
+          Les champs exacts disponibles dépendent du paramètre `type`. 
+ 
+          Se référer au [schéma de données ouvert (type=dataset)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=dataset) 
+          ou au [schéma d’information ouvert (type=info)] (https://open.canada.ca/data/api/action/scheming_dataset_schema_show?type=info) 
+          pour obtenir des renseignements sur tous les champs de métadonnées disponibles. 
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json'
+              fr:
+                $ref: 'schemas/dataset-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the dataset metadata updated
+            fr: |
+              Une copie des métadonnées du jeu de données mises à jour. 
+  "/action/package_delete":
+    post:
+      summary: 
+        en: |
+          Delete a dataset (package)
+        fr: |
+          Supprimer un jeu de données (paquetage). 
+      description: 
+        en: |
+          Remove a dataset and all its resources including uploaded files (where applicable).
+        fr: |
+          Supprimer un jeu de données et toutes ses ressources, y compris les fichiers téléchargés (le cas échéant). 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: 
+                    en: | 
+                      The id of the dataset
+                    fr: |
+                      L’identifiant du jeu de données. 
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              'null'
+            fr: |
+              'null'
+  "/action/resource_create":
+    post:
+      summary: 
+        en: |
+          Create a new resource
+        fr: |
+          Créer une nouvelle ressource. 
+      description: 
+        en: |
+          Add a resource to a dataset (package). POST using `multipart/form-data` to upload a file.
+        fr: |
+          Ajouter une ressource à un jeu de données (paquet). POST utilisant `multipart/form-data` pour télécharger un fichier. 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the resource metadata created
+            fr: |
+              Une copie des métadonnées de la ressource créées 
+  "/action/resource_update":
+    post:
+      summary: 
+        en: |
+          Update an existing resource
+        fr: |
+          Mettre à jour une ressource existante. 
+      description: 
+        en: |
+          POST using `multipart/form-data` to upload a file.
+        fr: |
+          POST en utilisant `multipart/form-data` pour télécharger un fichier. 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the resource metadata updated
+            fr: |
+              Une copie des métadonnées de la ressource mises à jour. 
+  "/action/resource_patch":
+    post:
+      summary: 
+        en: |
+          Update only specific fields of an existing resource
+        fr: |
+          Mettre à jour uniquement des champs précis d’une ressource existante. 
+      description: 
+        en: |
+          Any fields not passed will retain their original values.
+
+          POST using `multipart/form-data` to upload a file.
+        fr: |
+          Tous les champs non transmis conserveront leur valeur initiale. 
+ 
+          POST en utilisant `multipart/form-data` pour télécharger un fichier. 
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              en:
+                $ref: 'schemas/dataset-en.json#/properties/resources/items'
+              fr:
+                $ref: 'schemas/dataset-fr.json#/properties/resources/items'
+          multipart/form-data:
+            schema:
+              en:
+                $ref: 'schemas/resource-multipart-en.json'
+              fr:
+                $ref: 'schemas/resource-multipart-fr.json'
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              a copy of the resource metadata updated
+            fr: |
+              Une copie des métadonnées de la ressource mises à jour. 
+  "/action/resource_delete":
+    post:
+      summary: 
+        en: |
+          Delete a resource
+        fr: |
+          Supprimer une ressource. 
+      description:
+        en: |
+          Remove a resource from a dataset (package) and its uploaded file (where applicable).
+        fr: |
+          Supprimer une ressource d’un jeu de données (paquetage) et de son fichier téléchargé (le cas échéant). 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: 
+                    en: |
+                      The id of the resource
+                    fr: |
+                      L’identifiant de la ressource. 
+      tags:
+      - action
+      responses:
+        '200':
+          description: 
+            en: |
+              'null'
+            fr: |
+              'null'
+components:
+  schemas: {}
+  securitySchemes:
+    internal_api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+

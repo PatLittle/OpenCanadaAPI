@@ -1,3 +1,3 @@
 SwaggerUI for Open.Canada.ca
 
-https://patlittle.github.io/OpenCanadaAPI/
+https://open-data.github.io/OpenCanadaAPI/
